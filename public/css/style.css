@@ -1,3 +1,5 @@
+@import url(../fonts/industry_inc/font.css);
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -9,7 +11,7 @@ body {
   background-size: cover;
   background-attachment: fixed;
   color: #fff;
-  font-family: industry-inc-base, sans-serif;
+  font-family: 'IndustryInc-Base', sans-serif;
   font-style: normal;
   font-weight: 400;
 }

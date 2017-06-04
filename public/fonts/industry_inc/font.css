@@ -1,0 +1,14 @@
+@font-face {
+  font-family: 'IndustryInc-Base';
+  src: url('IndustryInc-Base.woff') format('woff'), url('IndustryInc-Base.ttf') format('truetype'), url('IndustryInc-Base.svg#IndustryInc-Base') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'industry_inc';
+  src: url('industry_inc.eot');
+  src: url('industry_inc.woff2') format('woff2'), url('industry_inc.eot?#iefix') format('embedded-opentype');
+  font-weight: normal;
+  font-style: normal;
+}
