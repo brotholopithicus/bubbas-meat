@@ -9,6 +9,16 @@ body {
   background-size: cover;
   background-attachment: fixed;
   color: #fff;
+  font-family: industry-inc-base, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+}
+
+h1 {
+  align-self: center;
+  width: 75%;
+  text-align: center;
+  font-size: 5rem;
 }
 
 .container {
@@ -16,9 +26,35 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  background-color: rgba(69, 88, 143, 0.5);
+}
+
+.text-container, .img-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-content: center;
+}
+
+.text-container {
+  background-color: rgba(69, 88, 143, 1);
+  text-align: center;
+  flex: 1 0 25%;
+  border-bottom: 10px solid #fff;
+}
+
+.img-container {
+  background-color: rgba(69, 88, 143, 0.5);
+  padding: 5vh;
+  flex: 1 1 75%;
+  display: flex;
+}
+
+img {
+  height: 100%;
 }
 
 a {
