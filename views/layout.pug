@@ -2,7 +2,12 @@ doctype html
 html
   head
     title= title
+    link(rel='stylesheet', href='/css/normalize.css')
     link(rel='stylesheet', href='/css/style.css')
 
   body
+    include partials/nav_menu
+
     block content
+
+    script(src='/js/app.js')
