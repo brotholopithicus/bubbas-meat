@@ -12,10 +12,7 @@ Primary style
 }
 
 body {
-  background: url(../imgs/smoking_meat.jpeg) no-repeat center center;
-  background-size: cover;
-  background-attachment: fixed;
-  color: #fff;
+  color: #000;
   font-style: normal;
   font-weight: 400;
   font: 1rem/1.6 'IndustryInc-Base', sans-serif;
@@ -31,8 +28,6 @@ a {
 }
 
 h1 {
-  align-self: center;
-  width: 75%;
   text-align: center;
   font-size: 2.5em;
 }
@@ -84,6 +79,128 @@ Main Components
 -------------------------------- */
 
 header {}
+
+
+/* --------------------------------
+  Contact Page
+  -------------------------------- */
+
+.contact-page {
+  position: absolute;
+  width: 100%;
+  min-height: 95%;
+  color: #2b3e51;
+  overflow-y: auto;
+  background-color: rgb(255, 255, 255);
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  flex: 1;
+  width: 90%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+fieldset {
+  border: none;
+  margin: 24px 0;
+}
+
+legend, .form-control.form-textarea .form-label {
+  margin-bottom: 20px;
+  font-size: 1.25rem;
+  width: 100%;
+  border-bottom: 1px solid #d4d4d4;
+  text-align: left;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-control {
+  margin-bottom: 1em;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.form-control.form-textarea {
+  flex-direction: column;
+}
+
+.form-control .form-label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 20vmin;
+}
+
+.form-control .form-input {
+  flex: 1;
+  padding: 12px;
+  font-family: 'Open Sans', sans-serif;
+  color: #2b3e51;
+  width: 100%;
+  border: 1px solid #cfd9db;
+  border-radius: 0.25em;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form input:focus, .contact-form textarea:focus {
+  outline: none;
+  border-color: #2c97de;
+  box-shadow: 0 0 5px rgba(44, 151, 222, 0.2);
+}
+
+.form-control.form-textarea textarea {
+  min-height: 20vmin;
+  resize: vertical;
+  overflow: auto;
+}
+
+.contact-form button.submit {
+  background: #2c97de;
+  color: #fff;
+}
+
+.contact-form button.submit:hover {
+  background: #42a2e1;
+}
+
+.contact-form button.submit:focus {
+  outline: none;
+  background: #2b3e51;
+}
+
+.contact-form button.submit:active {
+  transform: scale(0.9);
+}
+
+.contact-form [required] {
+  background: url(../imgs/svgs/required.svg) no-repeat top right;
+}
+
+.contact-form .error {
+  border-color: #e94b35 !important;
+}
+
+.form-control.form-textarea {
+  margin-top: 20px;
+  padding-top: 10px;
+}
+
+.form-control .form-input::-webkit-input-placeholder {
+  color: #94aab0;
+}
 
 
 /* --------------------------------
@@ -158,7 +275,7 @@ span.nav-toggle {
   z-index: 3;
   transition: background 0.2s;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(0, 0, 0, 0.4);
   overflow: hidden;
   text-indent: 100%;
   white-space: nowrap;
@@ -235,7 +352,7 @@ span.nav-toggle:hover {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  width: 100%;
+  width: 100vw;
   background-color: rgba(69, 88, 143, 0.5);
 }
 
@@ -260,6 +377,11 @@ span.nav-toggle:hover {
 
 .text-container a {
   height: 100%;
+}
+
+.text-container h1 {
+  width: 75%;
+  align-self: center;
 }
 
 .img-container {
