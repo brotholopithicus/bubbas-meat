@@ -373,6 +373,7 @@ Services Page
 }
 
 .carousel span {
+  z-index: 0;
   text-align: center;
   flex: 1;
   cursor: pointer;
