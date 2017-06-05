@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node ./bin/www",
     "dev": "DEBUG=bubbas-meat:* node ./bin/www",
-    "dev:nodemon": "DEBUG=bubbas-meat:* nodemon ./bin/www"
+    "dev:nodemon": "DEBUG=bubbas-meat:* nodemon ./bin/www --ignore './public/**/*'",
+    "css": "postcss ./public/css/style.css --use autoprefixer -o ./public/css/build.css"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
@@ -14,6 +15,7 @@
     "dotenv": "^4.0.0",
     "express": "~4.15.2",
     "morgan": "~1.8.1",
+    "nodemailer": "^4.0.1",
     "pug": "~2.0.0-beta11",
     "serve-favicon": "~2.4.2"
   }

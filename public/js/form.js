@@ -17,7 +17,7 @@ function Form() {
       name: this.name.value,
       company: this.company.value,
       email: this.email.value,
-      mesage: this.message.value
+      message: this.message.value
     }
     const options = {
       method: 'POST',

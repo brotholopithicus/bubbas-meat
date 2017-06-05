@@ -12,7 +12,6 @@ Primary style
 }
 
 body {
-  color: #000;
   font-style: normal;
   font-weight: 400;
   font: 1rem/1.6 'IndustryInc-Base', sans-serif;
@@ -28,6 +27,7 @@ a {
 }
 
 h1 {
+  color: #fff;
   text-align: center;
   font-size: 2.5em;
 }
