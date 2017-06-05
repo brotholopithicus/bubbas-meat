@@ -31,9 +31,8 @@ router.post('/', (req, res, next) => {
   transporter.sendMail(messageOptions, (err, info) => {
     if (err) return next(err);
     console.log('Message %s send: %s', info.messageId, info.response);
+    res.status(200).send({ message: 'SUCCESS', body: req.body });
   });
-  
-  res.status(200).send({ message: 'SUCCESS', body: req.body });
 });
 
 module.exports = router;
