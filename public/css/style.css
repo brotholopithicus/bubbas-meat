@@ -192,7 +192,7 @@ Home Page
 .text-container {
   text-align: center;
   flex: 1 0 10%;
-  border-bottom: 1vmin solid #fff;
+  /*border-bottom: 1vmin solid #fff;*/
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -210,7 +210,7 @@ Home Page
 
 .img-container {
   padding: 5vh;
-  flex: 1 1 75%;
+  flex: 0 1 75%;
   display: flex;
 }
 
@@ -350,6 +350,66 @@ legend, .form-control.form-textarea .form-label {
 
 .form-control .form-input::-webkit-input-placeholder {
   color: rgba(43, 62, 82, 0.5);
+}
+
+
+/* --------------------------------
+Services Page
+-------------------------------- */
+
+.services-container.sub-container {
+  overflow: auto;
+  padding: 0 3em;
+}
+
+.carousel {
+  flex: 1;
+  width: 70%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+}
+
+.carousel span {
+  text-align: center;
+  flex: 1;
+  cursor: pointer;
+  font-size: 72px;
+  color: #fff;
+}
+
+.carousel span.prev {
+  margin-right: -25%;
+}
+
+.carousel span.next {
+  margin-left: -25%;
+}
+
+.carousel span:hover {
+  color: #494949;
+}
+
+@media (min-width: 800px) {
+  .carousel span.prev, .carousel span.next {
+    margin: 0;
+  }
+}
+
+.fadeIn {
+  animation: fadeIn 0.5s ease-in-out;
+  visibility: visible !important;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 
