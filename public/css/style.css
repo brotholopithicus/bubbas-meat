@@ -5,6 +5,8 @@ Primary style
 @import url(../fonts/industry_inc/font.css);
 :root {
   font-size: calc(1vw + 1vh + .5vmin);
+  --header-bg-color: #512C2F;
+  --main-bg-color: #94A9AF;
 }
 
 *, *::after, *::before {
@@ -27,7 +29,6 @@ a {
 }
 
 h1 {
-  color: #fff;
   text-align: center;
   font-size: 2.5em;
 }
@@ -40,13 +41,17 @@ button {
   vertical-align: middle;
   user-select: none;
   border: 1px solid transparent;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
+  padding: 0.5em 1em;
+  font-size: 1em;
   line-height: 1.25;
-  border-radius: 0.25rem;
+  border-radius: 0.25em;
   transition: all 0.2s ease-in-out;
   cursor: pointer;
   outline: none;
+}
+
+button:disabled {
+  cursor: not-allowed;
 }
 
 button.primary {
@@ -73,25 +78,158 @@ button.secondary:hover {
   border-color: #adadad;
 }
 
+header {}
+
 
 /* --------------------------------
 Main Components
 -------------------------------- */
 
-header {}
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-header {
+  color: #fff;
+  flex: 1 0 15vh;
+  background-color: var(--header-bg-color);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-header h1 {
+  flex: 1;
+  margin: 0;
+  font-size: 2.5rem;
+  letter-spacing: 1rem;
+}
+
+.main-header img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 15vh;
+}
+
+.sub-container {
+  flex: 1 0 85vh;
+  background-color: var(--main-bg-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 2rem;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.main-content div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.sq-image {
+  margin-bottom: 2em;
+}
+
+.sq-image img {
+  width: 100%;
+}
+
+.copy p {
+  font-size: 0.77rem;
+  text-indent: 2em;
+}
+
+@media (min-width: 800px) {
+  .main-content {
+    flex-direction: row;
+  }
+  .sq-image {
+    margin: 0;
+    margin-right: 2em;
+  }
+}
+
+
+/* --------------------------------
+Home Page
+-------------------------------- */
+
+.index-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.24);
+  background: url(../imgs/smoking_meat.jpeg) no-repeat center center;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.text-container, .img-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-content: center;
+}
+
+.text-container {
+  text-align: center;
+  flex: 1 0 10%;
+  border-bottom: 1vmin solid #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.text-container a {
+  height: 100%;
+}
+
+.text-container h1 {
+  width: 75%;
+  align-self: center;
+}
+
+.img-container {
+  padding: 5vh;
+  flex: 1 1 75%;
+  display: flex;
+}
+
+img {
+  height: 100%;
+}
+
+a {
+  color: #00B7FF;
+}
 
 
 /* --------------------------------
   Contact Page
   -------------------------------- */
 
-.contact-page {
-  position: absolute;
-  width: 100%;
-  min-height: 95%;
+.contact-container {
   color: #2b3e51;
   overflow-y: auto;
-  background-color: rgb(255, 255, 255);
   font-size: 1rem;
   display: flex;
   flex-direction: column;
@@ -108,7 +246,8 @@ form {
 
 fieldset {
   border: none;
-  margin: 24px 0;
+  margin-top: 24px;
+  padding: 0;
 }
 
 legend, .form-control.form-textarea .form-label {
@@ -130,6 +269,7 @@ legend, .form-control.form-textarea .form-label {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  align-items: center;
 }
 
 .form-control.form-textarea {
@@ -150,14 +290,14 @@ legend, .form-control.form-textarea .form-label {
   font-family: 'Open Sans', sans-serif;
   color: #2b3e51;
   width: 100%;
-  border: 1px solid #cfd9db;
+  border: 1px solid rgba(43, 62, 82, 0.5);
   border-radius: 0.25em;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
 }
 
 .contact-form input:focus, .contact-form textarea:focus {
   outline: none;
-  border-color: #2c97de;
+  border-color: #1d2a37;
   box-shadow: 0 0 5px rgba(44, 151, 222, 0.2);
 }
 
@@ -168,12 +308,14 @@ legend, .form-control.form-textarea .form-label {
 }
 
 .contact-form button.submit {
-  background: #2c97de;
+  margin: 0 auto;
+  font-size: 0.75rem;
+  background: #2b3e51;
   color: #fff;
 }
 
 .contact-form button.submit:hover {
-  background: #42a2e1;
+  background: #3a4e62;
 }
 
 .contact-form button.submit:focus {
@@ -186,11 +328,19 @@ legend, .form-control.form-textarea .form-label {
 }
 
 .contact-form [required] {
-  background: url(../imgs/svgs/required.svg) no-repeat top right;
+  background: url(../imgs/svgs/required2.svg) no-repeat top right;
 }
 
 .contact-form .error {
   border-color: #e94b35 !important;
+}
+
+.contact-form .success {
+  background: url(../imgs/svgs/check.svg) no-repeat center right;
+}
+
+.contact-form input, .contact-form textarea, .contact-form [required] {
+  background-color: rgba(255, 255, 255, 0.25);
 }
 
 .form-control.form-textarea {
@@ -199,7 +349,7 @@ legend, .form-control.form-textarea .form-label {
 }
 
 .form-control .form-input::-webkit-input-placeholder {
-  color: #94aab0;
+  color: rgba(43, 62, 82, 0.5);
 }
 
 
@@ -344,57 +494,4 @@ span.nav-toggle:hover {
 .nav-toggle.open .nav-icon::before {
   /*transform: translate(-5px, -3px) rotate(-45deg) scaleX(0.5);*/
   transform: translateY(0) rotate(45deg);
-}
-
-.container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 100vw;
-  background-color: rgba(69, 88, 143, 0.5);
-}
-
-.text-container, .img-container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  justify-content: center;
-}
-
-.text-container {
-  background-color: rgba(69, 88, 143, 1);
-  text-align: center;
-  flex: 1 0 10%;
-  border-bottom: 1vmin solid #fff;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-
-.text-container a {
-  height: 100%;
-}
-
-.text-container h1 {
-  width: 75%;
-  align-self: center;
-}
-
-.img-container {
-  background-color: rgba(69, 88, 143, 0.5);
-  padding: 5vh;
-  flex: 1 1 75%;
-  display: flex;
-}
-
-img {
-  height: 100%;
-}
-
-a {
-  color: #00B7FF;
 }
