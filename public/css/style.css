@@ -15,6 +15,8 @@ Primary style
 }
 
 body {
+  margin: 0;
+  padding: 0;
   font-style: normal;
   font-weight: 400;
   font: 1rem/1.6 'IndustryInc-Base', sans-serif;
@@ -90,7 +92,10 @@ button.secondary:hover {
   border-color: #adadad;
 }
 
-header {}
+main {
+  display: flex;
+  flex-direction: column;
+}
 
 
 /* --------------------------------
@@ -117,44 +122,66 @@ Main Components
   transform: scale(1.05);
 }
 
-.container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
 .main-header {
   color: #fff;
-  flex: 1 0 15vh;
+  flex: 0 0 5rem;
   background-color: var(--header-bg-color);
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+}
+
+.main-header .logo, .main-header .title, .main-header .menu {
+  display: flex;
   align-items: center;
 }
 
-.main-header h1 {
+.main-header .logo {
+  flex: 0 0 25vw;
+  justify-content: flex-start;
+}
+
+.main-header .logo svg {
+  color: #a2a2a2;
+  margin: 1rem;
+  height: 50%;
+}
+
+.main-header .logo svg .st0, .main-header .logo svg .st1 {
+  stroke: #f1f1f1;
+  fill: #f1f1f1;
+}
+
+.main-header .logo:hover svg .st0, .main-header .logo:hover svg .st1 {
+  fill: #d6d6d6;
+  stroke: #d6d6d6;
+}
+
+.main-header .title {
   flex: 1;
-  margin: 0;
+  justify-content: center;
+}
+
+.main-header .title h1 {
+  color: #f1f1f1;
   font-size: 2.5rem;
   letter-spacing: 1rem;
 }
 
-.main-header img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 15vh;
+.main-header .menu {
+  flex: 0 0 25vw;
+  justify-content: flex-end;
+}
+
+.container {
+  flex: 1 1 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .sub-container {
   overflow-y: auto;
   flex: 1 0 85vh;
   background-color: var(--main-bg-color);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
   min-height: 85vh;
 }
 
@@ -196,7 +223,6 @@ Main Components
 .images img {
   max-width: 85%;
   height: auto;
-  border-radius: 0.25rem;
   cursor: pointer;
   margin-top: 1rem;
 }
@@ -396,14 +422,58 @@ Services Page
 -------------------------------- */
 
 .services-container {
-  padding: 2rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.carousel {
+  width: 100%;
+  margin: 0 auto;
+  font-family: sans-serif;
+}
+
+.slider {
+  position: relative;
+}
+
+.carousel button {
+  padding: 0 0.5rem;
+  transition: 0.2s;
+}
+
+.carousel button:hover {
+  transform: scale(1.02);
+  background-color: #b6b6b6;
+}
+
+.carousel button:nth-of-type(1) {
+  position: absolute;
+  left: 0;
+  top: 50%;
+}
+
+.carousel button:nth-of-type(2) {
+  position: absolute;
+  right: 0;
+  top: 50%;
+}
+
+.slider .cell {
+  width: 100%;
+}
+
+.slider img {
+  margin: 0 auto;
+  display: block;
+  height: 100%;
 }
 
 .text-container {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  margin-top: 2rem;
   grid-gap: 0.75vmin;
 }
 
@@ -414,75 +484,9 @@ Services Page
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-.text-container ul {
-  padding: 0.1rem;
-  text-align: center;
-}
-
-.text-container ul li {
-  display: inline-block;
-  font-size: 1.75rem;
-}
-
-.text-container ul li::before {
-  content: '\00a0\•\00a0';
-}
-
-.carousel {
-  width: 100%;
-  min-height: 300px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  user-select: none;
-}
-
-.carousel span {
-  z-index: 0;
-  text-align: center;
-  cursor: pointer;
-  font-size: 72px;
-  color: #fff;
-}
-
-.carousel img {
-  border-radius: 0.25rem;
-  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.2);
-}
-
-.carousel span.prev {
-  margin-right: -25%;
-}
-
-.carousel span.next {
-  margin-left: -25%;
-}
-
-.carousel span:hover {
-  color: #494949;
-}
-
-@media (min-width: 800px) {
-  .carousel span.prev, .carousel span.next {
-    margin: 0;
-  }
-  .text-container li:first-child:before {
-    content: '';
-  }
-}
-
-.fadeIn {
-  animation: fadeIn 0.5s ease-in-out;
-  visibility: visible !important;
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
+@media(min-width: 800px) {
+  .carousel {
+    width: 55%;
   }
 }
 
@@ -522,8 +526,12 @@ Modal
 }
 
 .nav-overlay svg {
-  width: 30vw;
-  /*padding: 2em;*/
+  width: 30vmin;
+  border-bottom: 5px solid #a2a2a2;
+}
+
+.nav-overlay svg:hover {
+  border-bottom: 5px solid #f1f1f1;
 }
 
 .nav-overlay svg .st0 {

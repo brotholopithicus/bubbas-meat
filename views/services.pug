@@ -4,12 +4,22 @@ block content
   include partials/header
   .services-container.sub-container
     .carousel
+      .slider
+        - for(var i = 1; i < 4; i++)
+          div.cell
+            img(src='/imgs/image' + i + '.jpg')
+      //- .controls
+      //-   .prev 
+      //-     span Prev
+      //-   .next
+      //-     span Next
     .text-container
       - 
-        var list = ['Catering', 'Proms', 'Shindigs', 'Bar-Mitzvahs', 'Funerals', 'Quinceañeras', 'Late-Night Raves', 'Baptisms', 'Cult Rituals']
+        var list = ['Catering', 'Shindigs', 'Bar-Mitzvahs', 'Funerals', 'Quinceañeras', 'Late-Night Raves', 'Baptisms', 'Barn Dances', 'Garden Parties' ]
       each item in list
         div(id=list.indexOf(item))
           span= item
 
 block scripts
+  script(src='/js/siema.js')
   script(src='/js/carousel.js')

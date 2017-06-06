@@ -1,4 +1,8 @@
 header.main-header
-  a(href='/')
-    img(src='/imgs/svgs/logo.svg')
-  h1= title.split(' - ')[0]
+  a.logo(href='/')
+    include wordmark.svg
+  .title
+    h1= title.split(' - ')[0]
+  .menu
+    span.nav-toggle
+      span.nav-icon
