@@ -7,7 +7,7 @@ function Carousel() {
     this.images[this.currentIndex].style.display = 'block';
     [this.prev, this.next].forEach(control => control.addEventListener('click', this.handleControls));
     this.interval = setInterval(() => {
-      this.handleControls();
+      this.nextCarouselImage();
     }, 1500);
   }
   this.createImageList = () => {
@@ -19,6 +19,9 @@ function Carousel() {
   }
   this.handleControls = (e) => {
     clearInterval(this.interval);
+    this.nextCarouselImage();
+  }
+  this.nextCarouselImage = () => {
     this.images[this.currentIndex].style.display = 'none';
     if (this.currentIndex < this.images.length - 1) {
       this.currentIndex++;

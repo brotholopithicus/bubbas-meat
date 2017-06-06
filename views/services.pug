@@ -5,13 +5,11 @@ block content
   .services-container.sub-container
     .carousel
     .text-container
-      ul
-        li Catering
-        li Shindigs
-        li Bar-Mitzvahs
-        li Quinceañeras
-        li Late-Night Raves
-        li Baptisms
-        
+      - 
+        var list = ['Catering', 'Proms', 'Shindigs', 'Bar-Mitzvahs', 'Funerals', 'Quinceañeras', 'Late-Night Raves', 'Baptisms', 'Cult Rituals']
+      each item in list
+        div(id=list.indexOf(item))
+          span= item
+
 block scripts
   script(src='/js/carousel.js')
