@@ -134,23 +134,22 @@ Main Components
 
 .main-content div {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 .sq-image {
   margin-bottom: 2em;
 }
 
-.sq-image img {
+.sq-image img, .sq-image video {
   width: 100%;
+  border-radius: 0.5rem;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
 }
 
 .copy p {
+  text-align: justify;
   font-size: 0.77rem;
-  text-indent: 2em;
+  text-indent: 2rem;
 }
 
 @media (min-width: 800px) {
@@ -158,7 +157,7 @@ Main Components
     flex-direction: row;
   }
   .sq-image {
-    margin: 0;
+    margin-bottom: 0;
     margin-right: 2em;
   }
 }
@@ -181,37 +180,18 @@ Home Page
   background-size: cover;
 }
 
-.text-container, .img-container {
+.img-container {
+  padding: 0 2rem;
+  flex: 0 1 75%;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  justify-content: center;
-}
-
-.text-container {
-  text-align: center;
-  flex: 1 0 10%;
-  /*border-bottom: 1vmin solid #fff;*/
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
   align-items: center;
 }
 
-.text-container a {
-  height: 100%;
-}
-
-.text-container h1 {
-  width: 75%;
-  align-self: center;
-}
-
-.img-container {
-  padding: 5vh;
-  flex: 0 1 75%;
-  display: flex;
+.img-container img {
+  width: 50%;
 }
 
 img {
@@ -357,17 +337,36 @@ legend, .form-control.form-textarea .form-label {
 Services Page
 -------------------------------- */
 
-.services-container.sub-container {
-  overflow: auto;
-  padding: 0 3em;
+.services-container {
+  justify-content: flex-start;
+  display: flex;
+  padding-top: 1rem;
+}
+
+.text-container {
+  padding: 1rem;
+}
+
+.text-container ul {
+  padding: 0.1rem;
+  text-align: center;
+}
+
+.text-container ul li {
+  display: inline-block;
+  font-size: 1.75rem;
+}
+
+.text-container ul li::before {
+  content: '\00a0\•\00a0';
 }
 
 .carousel {
-  flex: 1;
-  width: 70%;
+  width: 100%;
+  min-height: 300px;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   user-select: none;
 }
@@ -375,10 +374,14 @@ Services Page
 .carousel span {
   z-index: 0;
   text-align: center;
-  flex: 1;
   cursor: pointer;
   font-size: 72px;
   color: #fff;
+}
+
+.carousel img {
+  border-radius: 0.25rem;
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.2);
 }
 
 .carousel span.prev {
@@ -396,6 +399,9 @@ Services Page
 @media (min-width: 800px) {
   .carousel span.prev, .carousel span.next {
     margin: 0;
+  }
+  .text-container li:first-child:before {
+    content: '';
   }
 }
 

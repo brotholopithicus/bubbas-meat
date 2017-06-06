@@ -1,17 +1,24 @@
-const url = `https://source.unsplash.com/random/800x600`;
-const images = ['https://images.unsplash.com/photo-1486174070967-b0f1610f76de?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&h=300&fit=crop&s=0e927a1fdbf2e996360e803e06b4603a', 'https://images.unsplash.com/photo-1494118862175-3ecb4c309425?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&h=300&fit=crop&s=85dd98320ce3d73b6ed2da3e733be8ce', 'https://images.unsplash.com/photo-1440252775693-6545cfa377ec?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&h=300&fit=crop&s=67077625ef6dc266594b08bb357cdc53', 'https://images.unsplash.com/photo-1464548440467-d10d8aab562a?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&h=300&fit=crop&s=e63028e786587c953e98887f1eea308c'];
-
 function Carousel() {
   this.initialize = () => {
-    console.log('i am carousel');
     this.currentIndex = 0;
     this.carousel = document.querySelector('.carousel');
     this.images = [];
     this.createDOM();
     this.images[this.currentIndex].style.display = 'block';
     [this.prev, this.next].forEach(control => control.addEventListener('click', this.handleControls));
+    this.interval = setInterval(() => {
+      this.handleControls();
+    }, 1500);
+  }
+  this.createImageList = () => {
+    let list = [];
+    for (let i = 1; i < 7; i++) {
+      list.push(`/imgs/image000${i}.jpeg`);
+    }
+    return list;
   }
   this.handleControls = (e) => {
+    clearInterval(this.interval);
     this.images[this.currentIndex].style.display = 'none';
     if (this.currentIndex < this.images.length - 1) {
       this.currentIndex++;
@@ -37,6 +44,7 @@ function Carousel() {
     e.target.classList.remove(e.animationName);
   }
   this.appendImages = (parent) => {
+    let images = this.createImageList();
     for (let i = 0; i < images.length; i++) {
       let img = this.createElement('img', { src: images[i], id: i });
       img.addEventListener('animationend', this.handleAnimationEnd);
