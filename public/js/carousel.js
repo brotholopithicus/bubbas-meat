@@ -21,4 +21,5 @@ const slider = new Siema({
   draggable: true,
   loop: true,
 });
+
 slider.addArrows();
