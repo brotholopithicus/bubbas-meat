@@ -100,6 +100,24 @@ main {
 Main Components
 -------------------------------- */
 
+.fullscreen-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: hidden;
+  z-index: -100;
+}
+
+.bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+
 .links-container {
   margin-top: 2rem;
   border-top: 0.2rem solid #fff;
@@ -261,9 +279,9 @@ Home Page
   height: 100vh;
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.24);
-  background: url(../imgs/smoking_meat.jpeg) no-repeat center center;
+  /*background: url(../imgs/smoking_meat.jpeg) no-repeat center center;
   background-attachment: fixed;
-  background-size: cover;
+  background-size: cover;*/
 }
 
 .img-container {
@@ -427,21 +445,20 @@ Services Page
 }
 
 .text-container {
-  width: 75%;
+  width: 40%;
 }
 
 .text-container h2 {
   text-transform: uppercase;
-  font-size: 1rem;
+  font-size: 0.75rem;
   margin: 0.5rem auto;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #000;
 }
 
 .event-list {
-  background-color: #000;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 1px;
-  padding: 1px;
   font-size: 0.65rem;
 }
 
@@ -451,12 +468,34 @@ Services Page
 }
 
 .contact {
-  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.5rem;
   font-size: 0.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #000;
+}
+
+.contact a {
+  color: #000;
+  border: 1px solid #000;
+  padding: 0.35rem 0.35rem 0.1rem 0.35rem;
+  text-rendering: geometricPrecision;
+  font-family: 'IndustryInc-Base', sans-serif;
+  text-transform: uppercase;
+  border-radius: 0.05rem;
+}
+
+.contact a:hover {
+  background-color: rgba(0, 0, 0, 0.02);
 }
 
 .carousel {
-  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 100%;
   max-width: 20rem;
   margin: 1rem auto;

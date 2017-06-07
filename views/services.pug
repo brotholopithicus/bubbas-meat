@@ -4,15 +4,15 @@ block content
   include partials/header
   .services-container.sub-container
     .text-container
-      h2 Catering to
+      h2 Catering Available For
       .event-list
         - 
           var list = ['Garden Parties', 'Shindigs', 'Bar-Mitzvahs', 'Funerals', 'Quinceañeras', 'Late-Night Raves', 'Baptisms', 'Barn Dances']
         each item in list
           div(id=list.indexOf(item))
             span= item
-    .contact
-      a(href='/contact') Questions / Comments? Contact Me Now
+      .contact
+        a(href='/contact') Contact Us
     .carousel
       .slider
         - for(var i = 1; i < 4; i++)

@@ -266,6 +266,8 @@ export default class Siema {
     this.sliderFrame.style.width = `${(this.selectorWidth / this.perPage) * this.innerElements.length}px`;
 
     this.slideToCurrent();
+
+    this.setButtonPositions();
   }
 
 
@@ -505,32 +507,36 @@ export default class Siema {
     this.nextButton = document.createElement('span');
     this.prevButton.innerHTML = `<img class="arrow" src="${arrowLeft}" />`;
     this.nextButton.innerHTML = `<img class="arrow" src="${arrowRight}" />`;
-    this.selector.appendChild(this.prevButton);
-    this.selector.appendChild(this.nextButton);
+    this.selector.parentNode.appendChild(this.prevButton);
+    this.selector.parentNode.appendChild(this.nextButton);
 
     const buttonStyles = {
       'position': 'absolute',
-      'top': '40%',
+      'top': this.selector.offsetTop,
       'width': '2rem',
       'height': '2rem',
       'border-radius': '50%',
       'background-color': bgColor,
-      'padding': '0.2rem'
+      'padding': '0.2rem',
+      'cursor': 'pointer'
     }
 
     for (let style in buttonStyles) {
       this.prevButton.style[style] = buttonStyles[style];
       this.nextButton.style[style] = buttonStyles[style];
     }
-    this.prevButton.style.left = '0';
-    this.nextButton.style.right = '0';
+
+    this.setButtonPositions();
 
     this.prevButton.addEventListener('click', () => this.prev());
     this.nextButton.addEventListener('click', () => this.next());
 
   }
-
-
+  setButtonPositions() {
+    const pos = (window.innerWidth - this.selector.offsetWidth) / 4;
+    this.prevButton.style.left = `${pos}px`;
+    this.nextButton.style.right = `${pos}px`;
+  }
   /**
    * Removes listeners and optionally restores to initial markup
    * @param {boolean} restoreMarkup - Determinants about restoring an initial markup.
