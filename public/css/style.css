@@ -159,6 +159,7 @@ Main Components
   color: #a2a2a2;
   margin: 1rem;
   height: 50%;
+  transition: 0.2s;
 }
 
 .main-header .logo svg .st0, .main-header .logo svg .st1 {
@@ -166,9 +167,8 @@ Main Components
   fill: #f1f1f1;
 }
 
-.main-header .logo:hover svg .st0, .main-header .logo:hover svg .st1 {
-  fill: #d6d6d6;
-  stroke: #d6d6d6;
+.main-header .logo:hover svg {
+  transform: scale(1.02);
 }
 
 .main-header .title {
@@ -180,6 +180,7 @@ Main Components
   color: #f1f1f1;
   font-size: 2.5rem;
   letter-spacing: 1rem;
+  padding-top: 0.5rem;
 }
 
 .main-header .menu {
@@ -227,6 +228,11 @@ Main Components
   margin: 0 auto;
 }
 
+.main-content .contact {
+  border: none;
+  padding: 0;
+}
+
 .images {
   flex: 1;
   display: flex;
@@ -251,7 +257,7 @@ Main Components
   }
   .images {
     max-width: 85%;
-    margin: 2rem auto;
+    margin: 1rem auto;
     flex-direction: row;
   }
   .images img {
@@ -509,6 +515,14 @@ Services Page
 .slider img {
   width: 100%;
   height: auto;
+}
+
+.carousel span {
+  transition: 0.2s;
+}
+
+.carousel span:hover {
+  transform: scale(1.1);
 }
 
 @media(min-width: 800px) {
