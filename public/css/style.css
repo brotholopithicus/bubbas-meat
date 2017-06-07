@@ -7,7 +7,7 @@ Primary style
 :root {
   font-size: calc(1vw + 1vh + .5vmin);
   --header-bg-color: #512C2F;
-  --main-bg-color: #94A9AF;
+  --main-bg-color: #fff;
 }
 
 *, *::after, *::before {
@@ -191,7 +191,7 @@ Main Components
 }
 
 .text h2 {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   border-bottom: 2px solid #000;
 }
 
@@ -200,13 +200,14 @@ Main Components
 }
 
 .text h6 {
+  font-size: 0.6rem;
   padding-top: 10px;
   margin-bottom: 1rem;
 }
 
 .text p {
   text-align: justify;
-  font-size: 0.77rem;
+  font-size: 0.5rem;
   width: 75%;
   text-indent: 2rem;
   margin: 0 auto;
