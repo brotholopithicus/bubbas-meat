@@ -17,8 +17,6 @@ Primary style
 body {
   margin: 0;
   padding: 0;
-  font-style: normal;
-  font-weight: 400;
   font: 1rem/1.6 'IndustryInc-Base', sans-serif;
 }
 
@@ -185,30 +183,28 @@ Main Components
   min-height: 85vh;
 }
 
-.text {
+.main-content {
+  max-width: 90%;
   margin: 0 auto;
-  padding: 0 1.5rem;
+}
+
+.text {
+  font-family: 'Arvo', sans-serif;
+  flex: 1;
+  margin: 0 auto;
 }
 
 .text h2 {
-  font-size: 1.1rem;
-  border-bottom: 2px solid #000;
-}
-
-.text h2 {
-  margin-bottom: 0;
-}
-
-.text h6 {
-  font-size: 0.6rem;
-  padding-top: 10px;
+  text-transform: uppercase;
+  font-size: 1.2rem;
   margin-bottom: 1rem;
 }
 
 .text p {
+  border-top: 2px solid #000;
+  padding-top: 1rem;
   text-align: justify;
   font-size: 0.5rem;
-  width: 75%;
   text-indent: 2rem;
   margin: 0 auto;
 }
@@ -222,25 +218,30 @@ Main Components
 }
 
 .images img {
-  max-width: 85%;
+  max-width: 95%;
+  margin-top: 1rem;
   height: auto;
   cursor: pointer;
-  margin-top: 1rem;
-}
-
-.images img:not(:last-child) {
-  margin-right: 1rem;
 }
 
 @media (min-width: 800px) {
+  .main-content {
+    max-width: 100%;
+  }
+  .text p {
+    max-width: 75%;
+  }
   .images {
-    width: 85%;
-    margin: 1rem auto;
+    max-width: 85%;
+    margin: 2rem auto;
     flex-direction: row;
   }
   .images img {
-    margin-top: 0.5rem;
-    max-width: 25%;
+    margin-top: 0;
+    max-width: calc(33% - 2rem)
+  }
+  .images img:not(:last-child) {
+    margin-right: 1rem;
   }
   .text {
     width: 85%;
@@ -281,10 +282,6 @@ Home Page
 
 img {
   height: 100%;
-}
-
-a {
-  color: #00B7FF;
 }
 
 
@@ -423,82 +420,61 @@ Services Page
 -------------------------------- */
 
 .services-container {
-  padding: 1rem;
+  font-family: 'Arvo', sans-serif;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-}
-
-.carousel {
-  width: 100%;
-  margin: 0 auto;
-  font-family: sans-serif;
-}
-
-.slider {
-  position: relative;
-}
-
-.carousel span {
-  font-size: 1.5rem;
-  background-color: rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
-  width: 2rem;
-  height: 2rem;
-  transition: 0.2s;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
 }
 
-.carousel span svg {
-  height: 100%;
+.text-container {
+  width: 75%;
 }
 
-.carousel span:hover {
-  background-color: rgba(0, 0, 0, 0.2);
+.text-container h2 {
+  text-transform: uppercase;
+  font-size: 1rem;
+  margin: 0.5rem auto;
 }
 
-.carousel span:nth-of-type(1) {
-  position: absolute;
-  left: 0;
-  top: 50%;
+.event-list {
+  background-color: #000;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1px;
+  padding: 1px;
+  font-size: 0.65rem;
 }
 
-.carousel span:nth-of-type(2) {
-  position: absolute;
-  right: 0;
-  top: 50%;
+.event-list div {
+  background-color: #fff;
+  text-align: center;
 }
 
-.slider .cell {
+.contact {
+  margin-top: 1rem;
+  font-size: 0.5rem;
+}
+
+.carousel {
+  flex: 1;
   width: 100%;
+  max-width: 20rem;
+  margin: 1rem auto;
+}
+
+.slider {
+  margin: 0;
+  position: relative;
 }
 
 .slider img {
-  margin: 0 auto;
-  display: block;
-  height: 100%;
-}
-
-.text-container {
   width: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 0.75vmin;
-}
-
-.text-container div {
-  color: #232836;
-  padding: 0.25rem;
-  text-align: center;
-  background-color: rgba(255, 255, 255, 0.1);
+  height: auto;
 }
 
 @media(min-width: 800px) {
   .carousel {
-    width: 55%;
+    width: 40%;
   }
 }
 

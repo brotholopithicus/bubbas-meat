@@ -3,23 +3,22 @@ extends layout
 block content
   include partials/header
   .services-container.sub-container
+    .text-container
+      h2 Catering to
+      .event-list
+        - 
+          var list = ['Garden Parties', 'Shindigs', 'Bar-Mitzvahs', 'Funerals', 'Quinceañeras', 'Late-Night Raves', 'Baptisms', 'Barn Dances']
+        each item in list
+          div(id=list.indexOf(item))
+            span= item
+    .contact
+      a(href='/contact') Questions / Comments? Contact Me Now
     .carousel
       .slider
         - for(var i = 1; i < 4; i++)
-          div.cell
+          div
             img(src='/imgs/image' + i + '.jpg')
-      //- .controls
-      //-   .prev 
-      //-     span Prev
-      //-   .next
-      //-     span Next
-    .text-container
-      - 
-        var list = ['Catering', 'Shindigs', 'Bar-Mitzvahs', 'Funerals', 'Quinceañeras', 'Late-Night Raves', 'Baptisms', 'Barn Dances', 'Garden Parties' ]
-      each item in list
-        div(id=list.indexOf(item))
-          span= item
 
 block scripts
-  script(src='/js/siema.js')
-  script(src='/js/carousel.js')
+  script(src='/bundle.js')
+  //- script(src='/js/carousel.js')
