@@ -1,20 +1,24 @@
 const events = document.querySelectorAll('.event');
 
 events.forEach(evt => {
-  const uri = addEventDirections(evt.dataset.event);
-  const linkDiv = document.createElement('div');
-  linkDiv.classList.add('contact');
-  const link = document.createElement('a');
-  link.href = uri;
-  link.classList.add('contect');
-  link.textContent = 'Get Directions';
-  link.target = '_blank';
-  linkDiv.appendChild(link);
-  evt.appendChild(linkDiv);
+  if (evt.dataset.event) {
+    const uri = addEventDirections(evt.dataset.event);
+    const linkDiv = document.createElement('div');
+    linkDiv.classList.add('contact');
+    const link = document.createElement('a');
+    link.href = uri;
+    link.classList.add('contect');
+    link.textContent = 'Get Directions';
+    link.target = '_blank';
+    linkDiv.appendChild(link);
+    evt.appendChild(linkDiv);
 
-  const datetime = evt.querySelector('#datetime');
-  const evtDate = getEventDate(evt);
-  datetime.textContent = evtDate;
+    const datetime = evt.querySelector('#datetime');
+    const evtDate = getEventDate(evt);
+    datetime.textContent = evtDate;
+  } else {
+    return;
+  }
 });
 
 function addEventDirections(evt) {

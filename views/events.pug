@@ -16,7 +16,11 @@ block content
           span= event.location.address.city + ', '
           span= event.location.address.state + ' '
           span= event.location.address.zip
-
+    else
+      .event
+        h3 NOTHING HERE. 
+        p This world is a vacuous empty pit of despair with nothing novel or exciting ever happening.
+        
   include partials/social_media
 
 block scripts

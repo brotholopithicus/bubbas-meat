@@ -824,6 +824,13 @@ Events Page
   font-size: 0.6rem;
 }
 
+.event p {
+  margin: 0 auto;
+  max-width: 65%;
+  text-align: center;
+  font-size: 0.75rem;
+  padding-bottom: 1rem;
+}
 @media(min-width: 800px) {
   .event {
     width: 55%;
