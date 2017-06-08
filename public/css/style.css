@@ -790,6 +790,7 @@ Events Page
 .events-container {
   overflow-y: auto;
   text-align: center;
+  padding-bottom: 1rem;
 }
 
 .event {
