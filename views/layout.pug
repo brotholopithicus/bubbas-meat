@@ -2,8 +2,8 @@ doctype html
 html
   head
     title= title
-    //- link(rel='stylesheet', href='/css/style.css')
-    link(rel='stylesheet', href='/css/build.css')
+    link(rel='stylesheet', href='/css/style.css')
+    //- link(rel='stylesheet', href='/css/build.css')
     block stylesheets
 
   body
@@ -13,5 +13,5 @@ html
         block content
       include partials/social_media
     script(src='/js/app.js')
-    
+
     block scripts

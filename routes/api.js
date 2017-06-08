@@ -2,10 +2,12 @@ const router = require('express').Router();
 const nodemailer = require('nodemailer');
 const Event = require('../models/Event');
 
+/* GET base api */
 router.get('/', (req, res, next) => {
   res.send('Welcome to API');
 });
 
+/* POST send email */
 router.post('/', (req, res, next) => {
   if (!req.body) return res.sendStatus(404);
 
@@ -35,6 +37,7 @@ router.post('/', (req, res, next) => {
   });
 });
 
+/* POST new event. */
 router.post('/event', (req, res, next) => {
   if (!req.body) return res.sendStatus(404);
   const data = {
@@ -54,6 +57,14 @@ router.post('/event', (req, res, next) => {
   event.save((err, evt) => {
     if (err) return next(err);
     res.json({ message: 'SUCCESS', evt });
+  });
+});
+
+/* GET event list. */
+router.get('/events', (req, res, next) => {
+  Event.find({}, (err, events) => {
+    if (err) return next(err);
+    res.json(events);
   });
 });
 

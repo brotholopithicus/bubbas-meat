@@ -3,8 +3,21 @@ extends layout
 block stylesheets
 
 block content
-  .fullscreen-bg
-    img.bg-video(src='/imgs/output.gif')
+  include partials/header
   .events-container
-    pre= events
+    each event in events
+      .event(data-event=event)
+        h3= event.title
+        h6= event.description
+        span#datetime
+        address
+          span= event.location.address.street
+          br
+          span= event.location.address.city + ', '
+          span= event.location.address.state + ' '
+          span= event.location.address.zip
+
   include partials/social_media
+
+block scripts
+  script(src='/js/events.js')
