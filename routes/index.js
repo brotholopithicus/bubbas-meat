@@ -20,4 +20,9 @@ router.get('/contact', (req, res, next) => {
   res.render('contact', { title: `Contact - Gordo Gustavo's` });
 });
 
+/* GET events page. */
+router.get('/events', (req, res, next) => {
+  res.render('events', { title: `Events - Gordo Gustavo's` });
+});
+
 module.exports = router;

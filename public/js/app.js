@@ -1,3 +1,11 @@
+const socialMediaLinks = document.querySelector('.links');
+const path = window.location.pathname;
+
+// hide social media links on first page
+if (path === '/') {
+  socialMediaLinks.style.display = 'none';
+}
+
 function App() {
   this.initialize = () => {
     this.nav = document.querySelector('.nav-overlay');
