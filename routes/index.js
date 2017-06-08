@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const Event = require('../models/Event');
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
@@ -22,7 +23,15 @@ router.get('/contact', (req, res, next) => {
 
 /* GET events page. */
 router.get('/events', (req, res, next) => {
-  res.render('events', { title: `Events - Gordo Gustavo's` });
+  Event.find({}, (err, events) => {
+    if (err) return next(err);
+    res.render('events', { title: `Events - Gordo Gustavo's`, events });
+  });
+});
+
+/* GET admin page. */
+router.get('/admin', (req, res, next) => {
+  res.render('admin', { title: `Admin - Gordo Gustavo's` });
 });
 
 module.exports = router;

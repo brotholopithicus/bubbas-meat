@@ -1,0 +1,15 @@
+extends layout
+
+block stylesheets
+  link(rel='stylesheet', href='https://unpkg.com/flatpickr/dist/flatpickr.min.css')
+
+block content
+  .admin-container
+    .flatpickr
+      input(type='text', placeholder='Select Date..', data-input)
+      a.input-button(title='toggle', data-toggle) &#x1F4C5;
+      a.input-button(title='clear', data-clear) &times;
+
+block scripts
+  script(src='https://unpkg.com/flatpickr')
+  script(src='/js/admin.js')

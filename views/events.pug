@@ -1,9 +1,10 @@
 extends layout
 
 block stylesheets
-  link(rel='stylesheet', href='/css/loader.css')
-    
+
 block content
   .fullscreen-bg
     img.bg-video(src='/imgs/output.gif')
+  .events-container
+    pre= events
   include partials/social_media

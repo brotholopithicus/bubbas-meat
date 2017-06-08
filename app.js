@@ -4,6 +4,7 @@ const favicon = require('serve-favicon');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 const compression = require('compression');
 const helmet = require('helmet');
 
@@ -13,6 +14,11 @@ const index = require('./routes/index');
 const api = require('./routes/api');
 
 const app = express();
+
+mongoose.connect(process.env.MONGODB_URI);
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error'));
+db.once('open', () => console.log('connected to mongodb'));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
