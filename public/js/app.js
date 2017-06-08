@@ -20,11 +20,10 @@ function App() {
   }
 }
 
+
 // hide social media links on first page
-if (path === '/') {
+if (path === '/' || path === '/admin' || path === '/events') {
   socialMediaLinks.style.display = 'none';
-} else if (path === '/admin' || path === '/events') {
-  console.log('admin');
 } else {
   const app = new App();
   app.initialize();

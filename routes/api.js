@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const nodemailer = require('nodemailer');
+const Event = require('../models/Event');
 
 router.get('/', (req, res, next) => {
   res.send('Welcome to API');
@@ -31,6 +32,28 @@ router.post('/', (req, res, next) => {
   transporter.sendMail(messageOptions, (err, info) => {
     if (err) return res.json({ message: 'FAILURE', err, info });
     return res.json({ message: 'SUCCESS', info });
+  });
+});
+
+router.post('/event', (req, res, next) => {
+  if (!req.body) return res.sendStatus(404);
+  const data = {
+    title: req.body.title,
+    description: req.body.description,
+    date: req.body.date,
+    location: {
+      address: {
+        street: req.body.address,
+        city: req.body.city,
+        state: req.body.state,
+        zip: req.body.zip
+      }
+    }
+  }
+  const event = new Event(data);
+  event.save((err, evt) => {
+    if (err) return next(err);
+    res.json({ message: 'SUCCESS', evt });
   });
 });
 
