@@ -31,7 +31,10 @@ router.get('/events', (req, res, next) => {
 
 /* GET admin page. */
 router.get('/admin', (req, res, next) => {
-  res.render('admin', { title: `Admin - Gordo Gustavo's` });
+  Event.find({}, (err, events) => {
+    if (err) return next(err);
+    res.render('admin', { title: `Admin - Gordo Gustavo's`, events });
+  });
 });
 
 module.exports = router;

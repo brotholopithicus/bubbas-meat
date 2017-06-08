@@ -147,3 +147,36 @@ function Form() {
 
 const form = new Form();
 form.initialize();
+
+const deleteButtons = document.querySelectorAll('button#removeEvent');
+deleteButtons.forEach(button => button.addEventListener('click', deleteClickHandler));
+
+function deleteClickHandler(e) {
+  console.log('deleting....');
+  const eventId = JSON.parse(e.target.parentNode.dataset.event)._id;
+  const url = `/api/event/${eventId}`;
+  requestify(url, { method: 'DELETE' }).then(JSON.parse).then(res => {
+    if (res.message === 'OK') {
+      window.location.reload();
+    } else {
+      alert('error deleting that thing you tried to delete.');
+    }
+  });
+}
+
+function requestify(url, options) {
+  return new Promise((resolve, reject) => {
+    const req = new XMLHttpRequest();
+    req.open(options.method, url);
+    if (typeof options.headers !== 'undefined') options.headers.forEach(header => req.setRequestHeader(header.name, header.value));
+    req.onload = () => {
+      if (req.status >= 200 && req.status < 300) {
+        resolve(req.response);
+      } else {
+        reject(Error(req.statusText));
+      }
+    }
+    req.onerror = () => reject({ status: req.status, statusText: req.statusText });
+    req.send(options.data);
+  });
+}

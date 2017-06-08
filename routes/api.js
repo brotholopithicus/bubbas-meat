@@ -60,6 +60,15 @@ router.post('/event', (req, res, next) => {
   });
 });
 
+/* DELETE event. */
+router.delete('/event/:id', (req, res, next) => {
+  Event.findByIdAndRemove(req.params.id, (err, doc) => {
+    if (err) return next(err);
+    console.log('successfully deleted: ', doc);
+    return res.json({ message: 'OK', doc });
+  });
+});
+
 /* GET event list. */
 router.get('/events', (req, res, next) => {
   Event.find({}, (err, events) => {

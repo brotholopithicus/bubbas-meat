@@ -782,6 +782,53 @@ Loader
 Admin Page
 -------------------------------- */
 
+.admin-container.sub-container {
+  font-size: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-bottom: 2rem;
+}
+
+.admin-container h1 {
+  font-size: 1.5rem;
+}
+
+.admin-container .new-event {
+  width: 100%;
+}
+
+.admin-container .events {
+  text-align: center;
+  width: 50%;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #000;
+}
+
+.admin-container .events .event {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.events .event:first-child {
+  border-bottom: 2px solid #000;
+  text-transform: uppercase;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.events .event:not(:last-child) {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.events .event button {
+  color: #fff;
+  background-color: #c26262;
+}
+
 
 /* --------------------------------
 Events Page
@@ -831,6 +878,7 @@ Events Page
   font-size: 0.75rem;
   padding-bottom: 1rem;
 }
+
 @media(min-width: 800px) {
   .event {
     width: 55%;

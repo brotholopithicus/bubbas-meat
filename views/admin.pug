@@ -4,39 +4,54 @@ block stylesheets
   link(rel='stylesheet', href='https://unpkg.com/flatpickr/dist/flatpickr.min.css')
 
 block content
-  .admin-container
-    form.admin-form#admin
-      fieldset
-        legend Event Info
-        .form-control
-          label.form-label(for='title')
-            span Title
-          input#title.form-input(type='text', name='title', placeholder='Title', required)
-        .form-control
-          label.form-label(for='description')
-            span Description
-          input#description.form-input(type='text', name='description', placeholder='Description', required)
-        .form-control
-          label.form-label(for='data')
-            span Date
-          input#date.form-input.flatpickr(type='text', name='date', placeholder='Date', required)  
-        .form-control
-          label.form-label(for='address')
-            span Address
-          input#address.form-input(type='text', name='address', placeholder='Street Address', required)
-        .form-control
-          label.form-label(for='city')
-            span City
-          input#city.form-input(name='city', placeholder='City', required)
-        .form-control
-          label.form-label(for='state')
-            span State
-          input#state.form-input(name='state', placeholder='State', required)
-        .form-control
-          label.form-label(for='zip')
-            span Zip
-          input#zip.form-input(name='zip', placeholder='Zip', required)
-      button.submit(disabled) Submit
+  .admin-container.sub-container
+    h1 Event List
+    .events
+      .event
+        h4 Num.
+        h4 Title
+        h4 Delete
+      each event, index in events
+        .event(data-event=event)
+          h4= index + 1 + '.'
+          h4= event.title
+          button#removeEvent &times;
+      else
+        h4 There's nothing here.
+    .new-event
+      h1 New Event
+      form.admin-form#admin
+        fieldset
+          legend Event Info
+          .form-control
+            label.form-label(for='title')
+              span Title
+            input#title.form-input(type='text', name='title', placeholder='Title', required)
+          .form-control
+            label.form-label(for='description')
+              span Description
+            input#description.form-input(type='text', name='description', placeholder='Description', required)
+          .form-control
+            label.form-label(for='data')
+              span Date
+            input#date.form-input.flatpickr(type='text', name='date', placeholder='Date', required)  
+          .form-control
+            label.form-label(for='address')
+              span Address
+            input#address.form-input(type='text', name='address', placeholder='Street Address', required)
+          .form-control
+            label.form-label(for='city')
+              span City
+            input#city.form-input(name='city', placeholder='City', required)
+          .form-control
+            label.form-label(for='state')
+              span State
+            input#state.form-input(name='state', placeholder='State', required)
+          .form-control
+            label.form-label(for='zip')
+              span Zip
+            input#zip.form-input(name='zip', placeholder='Zip', required)
+        button.submit(disabled) Submit
 
 block scripts
   script(src='https://unpkg.com/flatpickr')
