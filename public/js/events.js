@@ -8,6 +8,7 @@ events.forEach(evt => {
   link.href = uri;
   link.classList.add('contect');
   link.textContent = 'Get Directions';
+  link.target = '_blank';
   linkDiv.appendChild(link);
   evt.appendChild(linkDiv);
 
