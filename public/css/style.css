@@ -140,7 +140,7 @@ Main Components
 
 .main-header {
   color: #fff;
-  flex: 0 0 5rem;
+  flex: 0 1 12vh;
   background-color: var(--header-bg-color);
   display: flex;
 }
