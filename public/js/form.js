@@ -68,6 +68,7 @@ function Form() {
   this.submitForm = (e) => {
     e.preventDefault();
     if (this.formSubmitted) return;
+    this.createMessageSpan();
     this.formSubmitted = true;
     const formData = {
       name: this.name.value,
@@ -84,34 +85,33 @@ function Form() {
     this.requestify('/api', options).then(JSON.parse).then(res => {
       if (res.message === 'SUCCESS') {
         this.displayResultMessage('&#10003;', 'rgb(90, 191, 13)');
+        setTimeout(() => {
+          window.location.href = '/';
+        }, 800);
       } else {
         this.displayResultMessage('&times;', 'rgb(245, 73, 73)');
+        setTimeout(() => {
+          window.location.href = '/contact';
+        }, 800);
       }
-      setTimeout(() => {
-        window.location.href = '/';
-      }, 1000)
     });
 
   }
+  this.createMessageSpan = () => {
+    this.message = document.createElement('span');
+    this.message.classList.add('message');
+    document.body.appendChild(this.message);
+
+    this.messageSymbol = document.createElement('span');
+    this.messageSymbol.classList.add('loader');
+    this.message.appendChild(this.messageSymbol);
+  }
   this.displayResultMessage = (symbol, color) => {
-    const success = document.createElement('span');
-    success.style.position = 'absolute';
-    success.style.height = '100%';
-    success.style.width = '100%';
-    success.style.top = '0';
-    success.style.left = '0';
-    success.style.display = 'flex';
-    success.style.flexDirection = 'column';
-    success.style.justifyContent = 'center';
-    success.style.alignItems = 'center';
-    success.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
-    const check = document.createElement('span');
-    check.innerHTML = symbol;
-    check.style.color = color;
-    check.style.fontSize = '25vh';
-    check.style.textShadow = '0px 0px 15px rgba(89, 89, 89, 1)';
-    success.appendChild(check);
-    document.body.appendChild(success);
+    this.messageSymbol.classList.remove('loader');
+    this.messageSymbol.classList.add('message-symbol');
+    this.messageSymbol.innerHTML = symbol;
+    this.messageSymbol.style.color = color;
+    this.messageSymbol.classList.add('message-symbol');
   }
 
   this.requestify = (url, options) => {
