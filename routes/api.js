@@ -51,7 +51,8 @@ router.post('/event', (req, res, next) => {
         state: req.body.state,
         zip: req.body.zip
       }
-    }
+    },
+    link: req.body.link
   }
   const event = new Event(data);
   event.save((err, evt) => {

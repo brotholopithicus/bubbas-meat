@@ -700,7 +700,7 @@ Social Media
 }
 
 .links a:last-child {
-  margin-right: 0.5rem;
+  margin-right: 1rem;
 }
 
 .links img {
@@ -796,15 +796,15 @@ Admin Page
 }
 
 .admin-container .new-event {
-  width: 100%;
+  border-top: 2px solid #000;
+  width: 90%;
 }
 
 .admin-container .events {
   text-align: center;
-  width: 50%;
   padding-bottom: 1rem;
   margin-bottom: 1rem;
-  border-bottom: 1px solid #000;
+  width: 90%;
 }
 
 .admin-container .events .event {
@@ -814,19 +814,40 @@ Admin Page
   align-items: center;
 }
 
-.events .event:first-child {
-  border-bottom: 2px solid #000;
+.admin-container .events .event:nth-child(2) {
+  border-bottom: 1px solid #000;
   text-transform: uppercase;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
+
 .events .event:not(:last-child) {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
+
 .events .event button {
   color: #fff;
   background-color: #c26262;
+}
+
+@media(min-width: 800px) {
+  .admin-container.sub-container {
+    flex-direction: row;
+    justify-content: center;
+  }
+  .admin-container .events {
+    flex: 1 1 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .admin-container .new-event {
+    flex: 1 1 50%;
+    border-top: none;
+    border-left: 2px solid #000;
+  }
 }
 
 
@@ -877,6 +898,21 @@ Events Page
   text-align: center;
   font-size: 0.75rem;
   padding-bottom: 1rem;
+}
+
+.event .event-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.event-links .contact {
+  flex: 1;
+}
+
+.event-links .contact a {
+  width: 8rem;
 }
 
 @media(min-width: 800px) {

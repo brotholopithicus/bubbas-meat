@@ -2,24 +2,42 @@ const events = document.querySelectorAll('.event');
 
 events.forEach(evt => {
   if (evt.dataset.event) {
-    const uri = addEventDirections(evt.dataset.event);
-    const linkDiv = document.createElement('div');
-    linkDiv.classList.add('contact');
-    const link = document.createElement('a');
-    link.href = uri;
-    link.classList.add('contect');
-    link.textContent = 'Get Directions';
-    link.target = '_blank';
-    linkDiv.appendChild(link);
-    evt.appendChild(linkDiv);
-
     const datetime = evt.querySelector('#datetime');
     const evtDate = getEventDate(evt);
     datetime.textContent = evtDate;
+    renderLinks(evt);
   } else {
     return;
   }
 });
+
+function renderLinks(evt) {
+  const evtLinks = evt.querySelector('.event-links');
+  const uri = addEventDirections(evt.dataset.event);
+  const linkOne = generateLink(uri, 'Get Directions');
+  evtLinks.appendChild(linkOne);
+  const link = JSON.parse(evt.dataset.event).link;
+  if (!link) return;
+  try {
+    const linkURL = new URL(link);
+    const linkTwo = generateLink(linkURL, linkURL.hostname.split('.')[0]);
+    evtLinks.appendChild(linkTwo);
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+function generateLink(uri, text) {
+  const linkDiv = document.createElement('div');
+  linkDiv.classList.add('contact');
+  const link = document.createElement('a');
+  link.href = uri;
+  link.classList.add('contect');
+  link.textContent = text;
+  link.target = '_blank';
+  linkDiv.appendChild(link);
+  return linkDiv;
+}
 
 function addEventDirections(evt) {
   evt = JSON.parse(evt);

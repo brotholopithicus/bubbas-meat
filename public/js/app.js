@@ -22,7 +22,7 @@ function App() {
 
 
 // hide social media links on first page
-if (path === '/' || path === '/admin') {
+if (path === '/') {
   socialMediaLinks.style.display = 'none';
 } else {
   const app = new App();

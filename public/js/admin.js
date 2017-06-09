@@ -12,6 +12,7 @@ function Form() {
     this.city = document.querySelector('input#city');
     this.state = document.querySelector('input#state');
     this.zip = document.querySelector('input#zip');
+    this.link = document.querySelector('input#link');
 
     this.formInputs = this.form.querySelectorAll('.form-input');
     this.formInputs.forEach(input => input.addEventListener('change', this.formInputHandler));
@@ -62,6 +63,16 @@ function Form() {
       case 'zip':
         if (value.length) valid = true;
         break;
+      case 'link':
+        if (value.length) {
+          try {
+            const url = new URL(value);
+            valid = true;
+          } catch (e) {
+            valid = false;
+          }
+        }
+        break;
       default:
         console.log('default!');
         valid = true;
@@ -99,12 +110,13 @@ function Form() {
       if (res.message === 'SUCCESS') {
         this.displayResultMessage('&#10003;', 'rgb(90, 191, 13)');
         setTimeout(() => {
-          window.location.href = '/';
+          window.location.reload();
         }, 800);
       } else {
         this.displayResultMessage('&times;', 'rgb(245, 73, 73)');
         setTimeout(() => {
-          window.location.href = '/contact';
+          this.formSubmitted = false;
+          document.body.removeChild(this.message);
         }, 800);
       }
     });

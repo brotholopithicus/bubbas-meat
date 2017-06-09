@@ -16,7 +16,8 @@ const EventSchema = new Schema({
       state: String,
       zip: String
     }
-  }
+  },
+  link: String
 });
 
 const Event = mongoose.model('Event', EventSchema);
