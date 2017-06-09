@@ -17,7 +17,10 @@ const EventSchema = new Schema({
       zip: String
     }
   },
-  link: String
+  link: {
+    url: String,
+    text: String
+  }
 });
 
 const Event = mongoose.model('Event', EventSchema);

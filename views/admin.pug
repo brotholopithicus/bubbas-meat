@@ -43,19 +43,28 @@ block content
           .form-control
             label.form-label(for='city')
               span City
-            input#city.form-input(name='city', placeholder='City', required)
+            input#city.form-input(type='text', name='city', placeholder='City', required)
           .form-control
             label.form-label(for='state')
               span State
-            input#state.form-input(name='state', placeholder='State', required)
+            input#state.form-input(type='text', name='state', placeholder='State', required)
           .form-control
             label.form-label(for='zip')
               span Zip
-            input#zip.form-input(name='zip', placeholder='Zip', required)
-          .form-control
-            label.form-label(for='link')
-              span Link
-            input#link.form-input(name='link', placeholder='Link', required)
+            input#zip.form-input(type='text', name='zip', placeholder='Zip', required)
+          .form-control.form-control-link
+            label.form-label(for='link-toggle') Add Link
+            #link-toggle 
+              span &plus;
+          .link-inputs
+            .form-control
+              label.form-label(for='link')
+                span Link URL
+              input#link.form-input(type='text', name='link', placeholder='Link URL', required)
+            .form-control
+              label.form-label(for='linktext')
+                span Link Text
+              input#linktext.form-input(type='text', name='linktext', placeholder='Link Text', required)
         button.submit(disabled) Submit
 
 block scripts

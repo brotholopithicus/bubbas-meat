@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const Event = require('../../models/Event');
 
+const auth = require('../auth');
+
 /* GET event list. */
 router.get('/', (req, res, next) => {
   Event.find({}, (err, events) => {
@@ -10,7 +12,7 @@ router.get('/', (req, res, next) => {
 });
 
 /* POST new event. */
-router.post('/new', (req, res, next) => {
+router.post('/new', auth.required, (req, res, next) => {
   if (!req.body) return res.sendStatus(404);
   const data = {
     title: req.body.title,
@@ -24,7 +26,10 @@ router.post('/new', (req, res, next) => {
         zip: req.body.zip
       }
     },
-    link: req.body.link
+    link: {
+      url: req.body.link,
+      text: req.body.linktext
+    }
   }
   const event = new Event(data);
   event.save((err, evt) => {
@@ -34,7 +39,7 @@ router.post('/new', (req, res, next) => {
 });
 
 /* DELETE event. */
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', auth.required, (req, res, next) => {
   Event.findByIdAndRemove(req.params.id, (err, doc) => {
     if (err) return next(err);
     console.log('successfully deleted: ', doc);

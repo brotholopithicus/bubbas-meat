@@ -6,14 +6,14 @@ const api = require('./api');
 
 const auth = require('./auth');
 
-router.use('/api', api);
-
 router.use((req, res, next) => {
   if (req.cookies.jwt) {
     req.headers.authorization = req.cookies.jwt;
   }
   next();
 });
+
+router.use('/api', api);
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
@@ -44,8 +44,7 @@ router.get('/events', (req, res, next) => {
 });
 
 /* GET admin page. */
-router.get('/admin', auth.optional, (req, res, next) => {
-  if (!req.payload) return res.redirect('/login');
+router.get('/admin', auth.required, (req, res, next) => {
   User.findById(req.payload.id).then((user) => {
     if (!user) return res.redirect('/login');
     Event.find({}, (err, events) => {

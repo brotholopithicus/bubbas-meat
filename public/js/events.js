@@ -17,14 +17,9 @@ function renderLinks(evt) {
   const linkOne = generateLink(uri, 'Get Directions');
   evtLinks.appendChild(linkOne);
   const link = JSON.parse(evt.dataset.event).link;
-  if (!link) return;
-  try {
-    const linkURL = new URL(link);
-    const linkTwo = generateLink(linkURL, linkURL.hostname.split('.')[0]);
-    evtLinks.appendChild(linkTwo);
-  } catch (e) {
-    console.log(e);
-  }
+  if (!link.url || !link.text) return;
+  const linkTwo = generateLink(link.link, link.text);
+  evtLinks.appendChild(linkTwo);
 }
 
 function generateLink(uri, text) {

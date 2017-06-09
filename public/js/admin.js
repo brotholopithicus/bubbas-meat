@@ -12,7 +12,19 @@ function Form() {
     this.city = document.querySelector('input#city');
     this.state = document.querySelector('input#state');
     this.zip = document.querySelector('input#zip');
+
+    this.formControlLink = document.querySelector('.form-control-link');
+
+    this.linkToggle = this.formControlLink.querySelector('#link-toggle');
+    this.linkToggle.addEventListener('click', this.addLink);
+
     this.link = document.querySelector('input#link');
+    this.linkText = document.querySelector('input#linktext');
+
+    this.linkInputs = document.querySelector('.link-inputs');
+    this.linkInputs.style.display = 'none';
+
+    this.numLinks = 0;
 
     this.formInputs = this.form.querySelectorAll('.form-input');
     this.formInputs.forEach(input => input.addEventListener('change', this.formInputHandler));
@@ -22,6 +34,12 @@ function Form() {
 
     this.formReady = false;
     this.formSubmitted = false;
+  }
+  this.addLink = (e) => {
+    this.linkInputs.style.display = 'block';
+    this.formControlLink.style.display = 'none';
+    // this.newLink = this.linkInputs.cloneNode(true);
+    // this.form.querySelector('fieldset').appendChild(this.newLink);
   }
   this.formInputHandler = (e) => {
     this.formSwitch(e.target);
@@ -72,6 +90,9 @@ function Form() {
             valid = false;
           }
         }
+        break;
+      case 'linktext':
+        if (value.length) valid = true;
         break;
       default:
         console.log('default!');
