@@ -106,7 +106,7 @@ function Form() {
       data: JSON.stringify(formData)
     }
 
-    this.requestify('/api/event', options).then(JSON.parse).then(res => {
+    this.requestify('/api/events/new', options).then(JSON.parse).then(res => {
       if (res.message === 'SUCCESS') {
         this.displayResultMessage('&#10003;', 'rgb(90, 191, 13)');
         setTimeout(() => {
@@ -166,7 +166,7 @@ deleteButtons.forEach(button => button.addEventListener('click', deleteClickHand
 function deleteClickHandler(e) {
   console.log('deleting....');
   const eventId = JSON.parse(e.target.parentNode.dataset.event)._id;
-  const url = `/api/event/${eventId}`;
+  const url = `/api/events/${eventId}`;
   requestify(url, { method: 'DELETE' }).then(JSON.parse).then(res => {
     if (res.message === 'OK') {
       window.location.reload();

@@ -1,5 +1,19 @@
 const router = require('express').Router();
 const Event = require('../models/Event');
+const User = require('../models/User');
+
+const api = require('./api');
+
+const auth = require('./auth');
+
+router.use('/api', api);
+
+router.use((req, res, next) => {
+  if (req.cookies.jwt) {
+    req.headers.authorization = req.cookies.jwt;
+  }
+  next();
+});
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
@@ -30,11 +44,20 @@ router.get('/events', (req, res, next) => {
 });
 
 /* GET admin page. */
-router.get('/admin', (req, res, next) => {
-  Event.find({}, (err, events) => {
-    if (err) return next(err);
-    res.render('admin', { title: `Admin - Gordo Gustavo's`, events });
-  });
+router.get('/admin', auth.optional, (req, res, next) => {
+  if (!req.payload) return res.redirect('/login');
+  User.findById(req.payload.id).then((user) => {
+    if (!user) return res.redirect('/login');
+    Event.find({}, (err, events) => {
+      if (err) return next(err);
+      res.render('admin', { title: `Admin - Gordo Gustavo's`, events });
+    });
+  }).catch(next);
 });
+
+router.get('/login', (req, res, next) => {
+  res.render('login', { title: `Login - Gordo Gustavo's` });
+});
+
 
 module.exports = router;

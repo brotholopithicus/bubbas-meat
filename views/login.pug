@@ -1,0 +1,22 @@
+extends layout
+
+block stylesheets
+
+block content
+  include partials/header
+  .login-container.sub-container
+    form.login-form#login
+      fieldset
+        legend Login
+        .form-control
+          label.form-label(for='email')
+            span Email
+          input#email.form-input(type='text', name='email', placeholder='Email', required)
+        .form-control
+          label.form-label(for='password')
+            span Password
+          input#password.form-input.flatpickr(type='password', name='password', placeholder='Password', required)  
+      button.submit(disabled) Login
+
+block scripts
+  script(src='/js/login.js')

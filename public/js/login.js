@@ -2,11 +2,9 @@ function Form() {
   this.initialize = () => {
     this.submitButton = document.querySelector('button.submit');
 
-    this.form = document.querySelector('form#contact');
-    this.name = document.querySelector('input#name');
-    this.company = document.querySelector('input#company');
-    this.email = document.querySelector('input#email');
-    this.message = document.querySelector('textarea#message');
+    this.form = document.querySelector('form');
+    this.title = document.querySelector('input#email');
+    this.description = document.querySelector('input#password');
 
     this.formInputs = this.form.querySelectorAll('.form-input');
     this.formInputs.forEach(input => input.addEventListener('change', this.formInputHandler));
@@ -25,7 +23,7 @@ function Form() {
     }
   }
   this.checkFormSubmitReady = () => {
-    if (this.form.querySelectorAll('.success').length === 4) {
+    if (this.form.querySelectorAll('.success').length === this.formInputs.length) {
       this.submitButton.disabled = false;
     } else {
       this.submitButton.disabled = true;
@@ -36,21 +34,16 @@ function Form() {
     let value = target.value;
     let valid = false;
     switch (id) {
-      case 'name':
-        if (value.split(' ').length > 1) valid = true;
-        break;
-      case 'company':
-        valid = true;
-        break;
       case 'email':
         const regex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
         if (regex.test(value)) valid = true;
         break;
-      case 'message':
-        if (value.length) valid = true;
+      case 'password':
+        if (value.length > 4) valid = true;
         break;
       default:
         console.log('default!');
+        valid = true;
         break;
     }
     return this.modifyElementStatus(target, valid);
@@ -70,32 +63,49 @@ function Form() {
     if (this.formSubmitted) return;
     this.createMessageSpan();
     this.formSubmitted = true;
-    const formData = {
-      name: this.name.value,
-      company: this.company.value,
-      email: this.email.value,
-      message: this.message.value
-    }
+    let user = {};
+    this.formInputs.forEach(input => {
+      user[input.id] = input.value
+    });
+    const formData = { user };
     const options = {
       method: 'POST',
       headers: [{ name: 'Content-Type', value: 'application/json' }],
       data: JSON.stringify(formData)
     }
-
-    this.requestify('/api/email', options).then(JSON.parse).then(res => {
-      if (res.message === 'SUCCESS') {
+    this.requestify('/api/users/login', options).then(JSON.parse).then(res => {
+      console.log(res);
+      const action = {
+        type: 'LOGIN',
+        payload: res
+      }
+      if (action.payload) {
+        this.localStorageMiddleware(action);
         this.displayResultMessage('&#10003;', 'rgb(90, 191, 13)');
         setTimeout(() => {
-          window.location.href = '/';
+          window.location.href = '/admin';
         }, 800);
       } else {
         this.displayResultMessage('&times;', 'rgb(245, 73, 73)');
         setTimeout(() => {
-          window.location.href = '/contact';
+          this.formSubmitted = false;
+          document.body.removeChild(this.message);
         }, 800);
       }
+    }).catch(err => {
+      this.displayResultMessage('&times;', 'rgb(245, 73, 73)');
+      setTimeout(() => {
+        this.formSubmitted = false;
+        document.body.removeChild(this.message);
+      }, 800);
     });
-
+  }
+  this.localStorageMiddleware = (action) => {
+    if (action.type === 'LOGIN') {
+      localStorage.setItem('jwt', action.payload.user.token);
+    } else if (action.type === 'LOGOUT') {
+      localStorage.setItem('jwt', '');
+    }
   }
   this.createMessageSpan = () => {
     this.message = document.createElement('span');
