@@ -47,6 +47,7 @@ app.use((req, res, next) => {
 
 // error handler
 app.use((err, req, res, next) => {
+  console.log(err);
   if (err.name === 'UnauthorizedError') {
     return res.redirect('/login');
   } else {

@@ -27,7 +27,7 @@ router.post('/new', auth.required, (req, res, next) => {
       }
     },
     link: {
-      url: req.body.link,
+      url: req.body.url,
       text: req.body.linktext
     }
   }
