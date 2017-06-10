@@ -18,7 +18,7 @@ function renderLinks(evt) {
   evtLinks.appendChild(linkOne);
   const link = JSON.parse(evt.dataset.event).link;
   if (!link.url || !link.text) return;
-  const linkTwo = generateLink(link.link, link.text);
+  const linkTwo = generateLink(link.url, link.text);
   evtLinks.appendChild(linkTwo);
 }
 

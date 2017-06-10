@@ -81,7 +81,7 @@ function Form() {
       case 'zip':
         if (value.length) valid = true;
         break;
-      case 'link':
+      case 'url':
         if (value.length) {
           try {
             const url = new URL(value);
@@ -91,7 +91,7 @@ function Form() {
           }
         }
         break;
-      case 'linktext':
+      case 'text':
         if (value.length) valid = true;
         break;
       default:

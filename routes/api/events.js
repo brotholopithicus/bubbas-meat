@@ -28,7 +28,7 @@ router.post('/new', auth.required, (req, res, next) => {
     },
     link: {
       url: req.body.url,
-      text: req.body.linktext
+      text: req.body.text
     }
   }
   const event = new Event(data);
