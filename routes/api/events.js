@@ -25,12 +25,16 @@ router.post('/new', auth.required, (req, res, next) => {
         state: req.body.state,
         zip: req.body.zip
       }
-    },
-    link: {
+    }
+  }
+
+  if (req.body.url && req.body.text) {
+    data.link = {
       url: req.body.url,
       text: req.body.text
     }
   }
+  
   const event = new Event(data);
   event.save((err, evt) => {
     if (err) return next(err);

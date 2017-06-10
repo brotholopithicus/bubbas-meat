@@ -17,7 +17,7 @@ function renderLinks(evt) {
   const linkOne = generateLink(uri, 'Get Directions');
   evtLinks.appendChild(linkOne);
   const parsedEvent = JSON.parse(evt.dataset.event);
-  if (parsedEvent.link.url && parsedEvent.link.text) {
+  if (parsedEvent.link) {
     const linkTwo = generateLink(parsedEvent.link.url, parsedEvent.link.text);
     evtLinks.appendChild(linkTwo);
   }
