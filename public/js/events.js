@@ -16,9 +16,9 @@ function renderLinks(evt) {
   const uri = addEventDirections(evt.dataset.event);
   const linkOne = generateLink(uri, 'Get Directions');
   evtLinks.appendChild(linkOne);
-  const evt = JSON.parse(evt.dataset.event);
-  if (evt.link) {
-    const linkTwo = generateLink(link.url, link.text);
+  const parsedEvent = JSON.parse(evt.dataset.event);
+  if (parsedEvent.link) {
+    const linkTwo = generateLink(parsedEvent.link.url, parsedEvent.link.text);
     evtLinks.appendChild(linkTwo);
   }
 }
