@@ -16,10 +16,11 @@ function renderLinks(evt) {
   const uri = addEventDirections(evt.dataset.event);
   const linkOne = generateLink(uri, 'Get Directions');
   evtLinks.appendChild(linkOne);
-  const link = JSON.parse(evt.dataset.event).link;
-  if (!link.url || !link.text) return;
-  const linkTwo = generateLink(link.url, link.text);
-  evtLinks.appendChild(linkTwo);
+  const evt = JSON.parse(evt.dataset.event);
+  if (evt.link) {
+    const linkTwo = generateLink(link.url, link.text);
+    evtLinks.appendChild(linkTwo);
+  }
 }
 
 function generateLink(uri, text) {
