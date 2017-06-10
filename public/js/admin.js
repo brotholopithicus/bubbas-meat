@@ -34,10 +34,14 @@ function Form() {
 
     this.formReady = false;
     this.formSubmitted = false;
+
+    // for linkinputs when hidden
+    this.modifier = 2;
   }
   this.addLink = (e) => {
     this.linkInputs.style.display = 'block';
     this.formControlLink.style.display = 'none';
+    this.modifier = 0;
     // this.newLink = this.linkInputs.cloneNode(true);
     // this.form.querySelector('fieldset').appendChild(this.newLink);
   }
@@ -49,7 +53,7 @@ function Form() {
     }
   }
   this.checkFormSubmitReady = () => {
-    if (this.form.querySelectorAll('.success').length === this.formInputs.length) {
+    if (this.form.querySelectorAll('.success').length === this.formInputs.length - this.modifier) {
       this.submitButton.disabled = false;
     } else {
       this.submitButton.disabled = true;
