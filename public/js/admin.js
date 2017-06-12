@@ -1,4 +1,4 @@
-flatpickr('.flatpickr', { enableTime: true, minDate: Date.now() });
+const flatpickr_input = flatpickr('.flatpickr', { enableTime: true, minDate: Date.now() });
 
 function Form() {
   this.initialize = () => {
@@ -18,8 +18,8 @@ function Form() {
     this.linkToggle = this.formControlLink.querySelector('#link-toggle');
     this.linkToggle.addEventListener('click', this.addLink);
 
-    this.link = document.querySelector('input#link');
-    this.linkText = document.querySelector('input#linktext');
+    this.link = document.querySelector('input#url');
+    this.linkText = document.querySelector('input#text');
 
     this.linkInputs = document.querySelector('.link-inputs');
     this.linkInputs.style.display = 'none';
@@ -32,18 +32,20 @@ function Form() {
 
     this.submitButton.addEventListener('click', this.submitForm);
 
+    this.modifier = 2;
+
     this.formReady = false;
     this.formSubmitted = false;
-
-    // for linkinputs when hidden
-    this.modifier = 2;
   }
   this.addLink = (e) => {
+    this.modifier = 0;
     this.linkInputs.style.display = 'block';
     this.formControlLink.style.display = 'none';
-    this.modifier = 0;
-    // this.newLink = this.linkInputs.cloneNode(true);
-    // this.form.querySelector('fieldset').appendChild(this.newLink);
+  }
+  this.hideLink = () => {
+    this.modifier = 2;
+    this.linkInputs.style.display = 'none';
+    this.formControlLink.style.display = 'flex';
   }
   this.formInputHandler = (e) => {
     this.formSwitch(e.target);
@@ -53,6 +55,8 @@ function Form() {
     }
   }
   this.checkFormSubmitReady = () => {
+    console.log(this.formInputs.length - this.modifier);
+    console.log(this.form.querySelectorAll('.success').length);
     if (this.form.querySelectorAll('.success').length === this.formInputs.length - this.modifier) {
       this.submitButton.disabled = false;
     } else {
@@ -109,9 +113,11 @@ function Form() {
     if (valid) {
       target.classList.remove('error');
       target.classList.add('success');
-      target.removeAttribute('required');
+      target.required = false;
     } else {
       target.classList.add('error');
+      target.classList.remove('success');
+      target.required = true;
     }
     return valid;
   }
@@ -188,9 +194,43 @@ form.initialize();
 const deleteButtons = document.querySelectorAll('button#removeEvent');
 deleteButtons.forEach(button => button.addEventListener('click', deleteClickHandler));
 
+const editButtons = document.querySelectorAll('button#editEvent');
+editButtons.forEach(button => button.addEventListener('click', editClickHandler));
+
+function getEventJSONFromParentNode(target) {
+  return JSON.parse(target.parentNode.parentNode.dataset.event);
+}
+
+function editClickHandler(e) {
+  const data = getEventJSONFromParentNode(e.target);
+  form.title.value = data.title;
+  form.description.value = data.description;
+  flatpickr_input.setDate(new Date(data.date));
+  form.address.value = data.location.address.street;
+  form.city.value = data.location.address.city;
+  form.state.value = data.location.address.state;
+  form.zip.value = data.location.address.zip;
+  if (typeof data.link !== 'undefined') {
+    form.addLink();
+    form.link.value = data.link.url;
+    form.linkText.value = data.link.text;
+  } else {
+    if (form.linkInputs) {
+      form.link.value = '';
+      form.linkText.value = '';
+      form.modifyElementStatus(form.link, false);
+      form.modifyElementStatus(form.linkText, false);
+      console.log(form.link);
+      form.hideLink();
+    }
+  }
+  form.formInputs.forEach(input => form.formSwitch(input));
+  form.checkFormSubmitReady();
+}
+
 function deleteClickHandler(e) {
   console.log('deleting....');
-  const eventId = JSON.parse(e.target.parentNode.dataset.event)._id;
+  const eventId = getEventJSONFromParentNode(e.target)._id;
   const url = `/api/events/${eventId}`;
   requestify(url, { method: 'DELETE' }).then(JSON.parse).then(res => {
     if (res.message === 'OK') {

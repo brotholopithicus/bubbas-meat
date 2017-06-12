@@ -11,7 +11,7 @@ router.get('/', (req, res, next) => {
   });
 });
 
-/* POST new event. */
+/* POST create / update event. */
 router.post('/new', auth.required, (req, res, next) => {
   if (!req.body) return res.sendStatus(404);
   const data = {
@@ -34,11 +34,9 @@ router.post('/new', auth.required, (req, res, next) => {
       text: req.body.text
     }
   }
-  
-  const event = new Event(data);
-  event.save((err, evt) => {
+  Event.findOneAndUpdate({ title: data.title }, data, { upsert: true }, (err, doc) => {
     if (err) return next(err);
-    res.json({ message: 'SUCCESS', evt });
+    return res.json({ message: 'SUCCESS', doc });
   });
 });
 

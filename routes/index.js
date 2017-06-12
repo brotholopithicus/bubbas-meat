@@ -43,6 +43,11 @@ router.get('/events', (req, res, next) => {
   });
 });
 
+/* GET reviews page. */
+router.get('/reviews', (req, res, next) => {
+  res.render('reviews', { title: `Reviews - Gordo Gustavo's` });
+});
+
 /* GET admin page. */
 router.get('/admin', auth.required, (req, res, next) => {
   User.findById(req.payload.id).then((user) => {

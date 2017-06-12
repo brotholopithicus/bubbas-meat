@@ -1,0 +1,13 @@
+extends layout
+
+block stylesheets
+
+block content
+  include partials/header
+  .events-container.sub-container
+    h2= title
+
+  include partials/social_media
+
+block scripts
+  script(src='/js/reviews.js')
