@@ -6,7 +6,7 @@ function Form() {
     this.name = document.querySelector('input#name');
     this.company = document.querySelector('input#company');
     this.email = document.querySelector('input#email');
-    this.message = document.querySelector('textarea#message');
+    this.messageInput = document.querySelector('textarea#message');
 
     this.formInputs = this.form.querySelectorAll('.form-input');
     this.formInputs.forEach(input => input.addEventListener('change', this.formInputHandler));
@@ -70,12 +70,12 @@ function Form() {
     if (this.formSubmitted) return;
     this.createMessageSpan();
     this.formSubmitted = true;
-    const formData = {
-      name: this.name.value,
-      company: this.company.value,
-      email: this.email.value,
-      message: this.message.value
-    }
+    let formData = {};
+    formData.name = this.name.value;
+    formData.company = this.company.value;
+    formData.email = this.email.value;
+    formData.message = this.messageInput.value;
+    console.log(formData);
     const options = {
       method: 'POST',
       headers: [{ name: 'Content-Type', value: 'application/json' }],
@@ -95,7 +95,6 @@ function Form() {
         }, 800);
       }
     });
-
   }
   this.createMessageSpan = () => {
     this.message = document.createElement('span');

@@ -4,7 +4,7 @@ const nodemailer = require('nodemailer');
 /* POST send email */
 router.post('/', (req, res, next) => {
   if (!req.body) return res.sendStatus(404);
-
+  
   const options = {
     host: 'smtp.zoho.com',
     port: 465,
@@ -22,7 +22,7 @@ router.post('/', (req, res, next) => {
     to: process.env.EMAIL,
     subject: 'Contact Form Submission',
     text: req.body.message + '\n' + req.body.email,
-    html: `<blockquote><p>${req.body.message}</p></blockquote><hr /><b>${req.body.name}</b><br /><i>${req.body.email}</i><hr />`
+    html: `<p>${req.body.message}</p><hr /><b>${req.body.name}</b><br /><span>${req.body.company}</span><br /><i>${req.body.email}</i>`
   }
 
   transporter.sendMail(messageOptions, (err, info) => {
