@@ -953,6 +953,11 @@ Admin Page
   grid-column-gap: 0.5rem;
 }
 
+.admin-container .events .event.empty h4 {
+  grid-column: 1 / 5;
+  text-align: center;
+}
+
 .admin-container .events .event:nth-child(2) {
   border-bottom: 1px solid #000;
   text-transform: uppercase;
