@@ -568,7 +568,7 @@ Modal
   transition: 0.3s;
   flex: 1;
   position: relative;
-  top: 15%;
+  top: 10%;
   width: 100%;
   text-align: center;
   /*margin-top: 30px;*/
@@ -867,6 +867,53 @@ Events Page
 @media(min-width: 800px) {
   .event {
     width: 55%;
+  }
+}
+
+
+/* --------------------------------
+Reviews Page
+-------------------------------- */
+
+.reviews-container {
+  overflow-y: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.review {
+  width: 90%;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.07);
+  border-radius: 0.25rem;
+  margin: 0.5rem;
+}
+
+.review h3 {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+}
+
+.review h6 {
+  font-size: 0.5rem;
+}
+
+.review h3, .review h6 {
+  text-align: center;
+  font-family: 'Arvo', sans-serif;
+}
+
+@media(min-width: 800px) {
+  .review {
+    width: 45%;
   }
 }
 

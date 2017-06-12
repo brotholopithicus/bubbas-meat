@@ -4,8 +4,16 @@ block stylesheets
 
 block content
   include partials/header
-  .events-container.sub-container
-    h2= title
+  .reviews-container.sub-container
+    each review in reviews
+      .review(data-event=review)
+        h3= review.quote
+        h6= review.name
+          
+    else
+      .event
+        h3 NOTHING HERE. 
+        p This world is a vacuous empty pit of despair with nothing novel or exciting ever happening.
 
   include partials/social_media
 

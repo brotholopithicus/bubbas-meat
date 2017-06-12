@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const Event = require('../models/Event');
 const User = require('../models/User');
+const Review = require('../models/Review');
 
 const api = require('./api');
 
@@ -45,7 +46,9 @@ router.get('/events', (req, res, next) => {
 
 /* GET reviews page. */
 router.get('/reviews', (req, res, next) => {
-  res.render('reviews', { title: `Reviews - Gordo Gustavo's` });
+  Review.find({}).then((reviews) => {
+    res.render('reviews', { title: `Reviews - Gordo Gustavo's`, reviews });
+  }).catch(next);
 });
 
 /* GET admin page. */
