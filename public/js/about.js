@@ -20,7 +20,8 @@ function createFullScreenImage(e) {
   }
 
   const buttonStyles = {
-    'z-index': '100'
+    'z-index': '100',
+    'position': 'fixed'
   }
   for (let style in buttonStyles) {
     closeButton.style[style] = buttonStyles[style];
@@ -36,7 +37,11 @@ function createFullScreenImage(e) {
     'overflow-y': 'auto',
     'background-color': 'rgba(0, 0, 0, 0.5)'
   }
+  
   const image = this.cloneNode();
+  const index = Array.prototype.indexOf.call(this.parentNode.children, this);
+
+  image.src = `/imgs/image${index + 4}.jpeg`;
   const imageStyles = {
     'position': 'absolute',
     'top': '0',
@@ -47,7 +52,6 @@ function createFullScreenImage(e) {
     'height': 'auto',
     'z-index': '99'
   }
-
   for (let style in containerStyles) {
     container.style[style] = containerStyles[style];
   }
