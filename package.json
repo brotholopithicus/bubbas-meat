@@ -6,7 +6,7 @@
     "start": "node ./bin/www",
     "dev": "DEBUG=bubbas-meat:* node ./bin/www",
     "dev:nodemon": "DEBUG=bubbas-meat:* nodemon ./bin/www --ignore 'public/js/*.js'",
-    "css": "postcss ./public/css/style.css --use autoprefixer -o ./public/css/build.css",
+    "css": "postcss ./src/style.css --use autoprefixer --use cssnano -o ./public/css/build.css",
     "build": "webpack -p",
     "watch": "webpack --watch & yarn dev"
   },
