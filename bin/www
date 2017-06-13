@@ -6,7 +6,6 @@
 
 const app = require('../app');
 const debug = require('debug')('bubbas-meat:server');
-const http = require('http');
 const https = require('https');
 const fs = require('fs');
 
