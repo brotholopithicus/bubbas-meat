@@ -558,7 +558,7 @@ Modal
   height: 0%;
   width: 100%;
   position: fixed;
-  z-index:3;
+  z-index: 3;
   bottom: 0;
   left: 0;
   background-color: #354546;
@@ -623,7 +623,7 @@ span.nav-toggle {
   right: 3vmin;
   height: 44px;
   width: 44px;
-  z-index: 3;
+  z-index: 4;
   transition: background 0.2s;
   border-radius: 50%;
   background-color: rgba(0, 0, 0, 0.4);
