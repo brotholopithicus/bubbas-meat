@@ -623,7 +623,7 @@ span.nav-toggle {
   right: 3vmin;
   height: 44px;
   width: 44px;
-  z-index: 4;
+  z-index: 5;
   transition: background 0.2s;
   border-radius: 50%;
   background-color: rgba(0, 0, 0, 0.4);
