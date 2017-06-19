@@ -3,6 +3,14 @@ const Review = require('../../models/Review');
 
 const auth = require('../auth');
 
+const quotes = require('./quotes');
+
+/* GET swanson quote */
+router.get('/quote', (req, res, next) => {
+  const randQuote = quotes[Math.floor(Math.random() * quotes.length)];
+  return res.json({ message: 'SUCCESS', quote: randQuote });
+});
+
 /* GET all reviews */
 router.get('/', (req, res, next) => {
   Review.find({}).then((reviews) => {
