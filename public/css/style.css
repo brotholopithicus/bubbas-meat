@@ -139,7 +139,6 @@ Main Components
 }
 
 .main-header {
-  z-index: 2;
   color: #fff;
   flex: 0 1 12vh;
   background-color: var(--header-bg-color);
@@ -198,6 +197,7 @@ Main Components
 }
 
 .sub-container {
+  z-index: -1;
   overflow-y: auto;
   flex: 1 0 85vh;
   background-color: var(--main-bg-color);
@@ -558,7 +558,7 @@ Modal
   height: 0%;
   width: 100%;
   position: fixed;
-  z-index: 3;
+  z-index: 2;
   bottom: 0;
   left: 0;
   background-color: #354546;
@@ -623,7 +623,7 @@ span.nav-toggle {
   right: 3vmin;
   height: 44px;
   width: 44px;
-  z-index: 5;
+  z-index: 50;
   transition: background 0.2s;
   border-radius: 50%;
   background-color: rgba(0, 0, 0, 0.4);
@@ -715,6 +715,7 @@ Social Media
   flex-direction: row;
   justify-content: flex-end;
   align-items: flex-end;
+  margin-right: 1rem;
 }
 
 .links a {
@@ -907,7 +908,7 @@ Reviews Page
 blockquote {
   display: block;
   background: #fff;
-  padding: 30px 20px 15px 55px;
+  padding: 30px 5rem 15px 55px;
   margin: 0 0 0;
   position: relative;
   font-family: Georgia, serif;
@@ -916,9 +917,12 @@ blockquote {
   color: #666;
   text-align: left;
   border-left: 15px solid #46171b;
-  border-right: 5px solid #46171b;
+  /*border-right: 5px solid #46171b;*/
   box-shadow: 2px 2px 15px #ccc;
-  height: 70px;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 blockquote::before {
