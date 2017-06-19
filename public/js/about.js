@@ -37,7 +37,7 @@ function createFullScreenImage(e) {
     'overflow-y': 'auto',
     'background-color': 'rgba(0, 0, 0, 0.5)'
   }
-  
+
   const image = this.cloneNode();
   const index = Array.prototype.indexOf.call(this.parentNode.children, this);
 

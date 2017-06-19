@@ -12,11 +12,12 @@ Primary style
 
 *, *::after, *::before {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin: 0;
-  padding: 0;
+  color: #1f1f1f;
   font: 1rem/1.6 'IndustryInc-Base', sans-serif;
 }
 
@@ -139,55 +140,29 @@ Main Components
 }
 
 .main-header {
-  color: #fff;
-  flex: 0 1 12vh;
+  color: #f1f1f1;
+  height: 3rem;
   background-color: var(--header-bg-color);
-  display: flex;
-  margin-bottom: 2px;
-  box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.2);
+  display: grid;
+  grid-template-columns: 10% 1fr 4rem;
+  grid-auto-rows: 3rem;
 }
 
-.main-header .logo, .main-header .title, .main-header .menu {
+.title h1 {
+  font-size: 1.5rem;
+  letter-spacing: 0.02em;
+  line-height: 3.25rem;
+}
+
+.main-header .menu {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
 .main-header .logo {
-  flex: 0 0 25vw;
-  justify-content: flex-start;
-}
-
-.main-header .logo svg {
-  color: #a2a2a2;
-  margin: 1rem;
-  height: 50%;
-  transition: 0.2s;
-}
-
-.main-header .logo svg .st0, .main-header .logo svg .st1 {
-  stroke: #f1f1f1;
-  fill: #f1f1f1;
-}
-
-.main-header .logo:hover svg {
-  transform: scale(1.02);
-}
-
-.main-header .title {
-  flex: 1;
-  justify-content: center;
-}
-
-.main-header .title h1 {
-  color: #f1f1f1;
-  font-size: 2.5rem;
-  letter-spacing: 1rem;
-  padding-top: 0.5rem;
-}
-
-.main-header .menu {
-  flex: 0 0 25vw;
-  justify-content: flex-end;
+  padding-left: 1rem;
 }
 
 .container {
@@ -470,6 +445,7 @@ Services Page
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: #1f1f1f;
 }
 
 .text-container {
@@ -623,10 +599,8 @@ Modal
 span.nav-toggle {
   cursor: pointer;
   position: absolute;
-  top: 3vmin;
-  right: 3vmin;
-  height: 44px;
-  width: 44px;
+  height: 2rem;
+  width: 2rem;
   z-index: 50;
   transition: background 0.2s;
   border-radius: 50%;
@@ -900,7 +874,8 @@ Reviews Page
 
 .review {
   background-color: #f1f1f1;
-  box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.15);
+  color: #1c1c1c;
+  padding: 1rem 0;
   text-align: center;
   font-size: 0.75rem;
 }
@@ -921,29 +896,10 @@ blockquote {
   line-height: 1.2;
   color: #666;
   text-align: left;
-  border-left: 15px solid #46171b;
-  /*border-right: 5px solid #46171b;*/
-  box-shadow: 2px 2px 15px #ccc;
   height: 120px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-
-blockquote::before {
-  content: "\201C";
-  /*Unicode for Left Double Quote*/
-  font-family: Georgia, serif;
-  font-size: 60px;
-  font-weight: bold;
-  color: #999;
-  position: absolute;
-  left: 10px;
-  top: 5px;
-}
-
-blockquote::after {
-  content: "";
 }
 
 blockquote em {
