@@ -1,8 +1,8 @@
-const quoteContainer = document.querySelector('blockquote#quote span');
+const quoteContainer = document.querySelector('p#quote span');
 
 async function displayQuote() {
   const quote = await getQuote();
-  quoteContainer.innerHTML = `${quote.quote} - <em>Ron Swanson</em>`;
+  quoteContainer.innerHTML = `${quote.quote}`;
 }
 
 function getQuote() {

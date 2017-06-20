@@ -4,22 +4,23 @@ block stylesheets
 
 block content
   include partials/header
-  .reviews.sub-container
+  .reviews.container
     .quote-container
-      blockquote#quote
+      p#quote
         span.fadeIn
     .reviews-container
       each review in reviews
         .review(data-event=review)
-          h3= review.quote
-          h6= review.name
+          .image
+            img(src='http://baconmockup.com/200/200')
+          .text
+            h4= review.quote
+            cite= review.name
 
       else
         .event
           h3 NOTHING HERE. 
           p This world is a vacuous empty pit of despair with nothing novel or exciting ever happening.
-
-  include partials/social_media
 
 block scripts
   script(src='/js/reviews.js')

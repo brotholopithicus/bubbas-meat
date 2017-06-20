@@ -2,6 +2,7 @@ const router = require('express').Router();
 const Event = require('../models/Event');
 const User = require('../models/User');
 const Review = require('../models/Review');
+const reviews = require('./reviews');
 
 const api = require('./api');
 
@@ -45,10 +46,14 @@ router.get('/events', (req, res, next) => {
 });
 
 /* GET reviews page. */
+// router.get('/reviews', (req, res, next) => {
+//   Review.find({}).then((reviews) => {
+//     res.render('reviews', { title: `Reviews - Gordo Gustavo's`, reviews });
+//   }).catch(next);
+// });
+
 router.get('/reviews', (req, res, next) => {
-  Review.find({}).then((reviews) => {
-    res.render('reviews', { title: `Reviews - Gordo Gustavo's`, reviews });
-  }).catch(next);
+  res.render('reviews', { title: `Reviews - Gordo Gustavo's`, reviews });
 });
 
 /* GET admin page. */

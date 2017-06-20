@@ -21,7 +21,10 @@ function createFullScreenImage(e) {
 
   const buttonStyles = {
     'z-index': '100',
-    'position': 'fixed'
+    'position': 'fixed',
+    'right': '1rem',
+    'top': '0.5rem'
+
   }
   for (let style in buttonStyles) {
     closeButton.style[style] = buttonStyles[style];

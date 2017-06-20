@@ -4,7 +4,7 @@ block stylesheets
 
 block content
   include partials/header
-  .events-container.sub-container
+  .events-container.container
     each event in events
       .event(data-event=event)
         h3= event.title
