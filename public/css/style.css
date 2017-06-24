@@ -908,29 +908,6 @@ Reviews Page
   font-size: 0.6rem;
 }
 
-.quote-container {
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  position: fixed;
-  background-color: #ffffff;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 0.75rem;
-}
-
-
-/* BLOCKQUOTE */
-
-.quote-container p {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  font-size: 0.4rem;
-  line-height: 200%;
-  padding-left: 0.5rem;
-}
-
-
 /* --------------------------------
 Admin Page
 -------------------------------- */
@@ -1022,24 +999,5 @@ Admin Page
   }
   .admin-container .event {
     width: 90%;
-  }
-}
-
-.fadeIn {
-  animation: fadeIn 4s infinite;
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  25% {
-    opacity: 1;
-  }
-  75% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
   }
 }

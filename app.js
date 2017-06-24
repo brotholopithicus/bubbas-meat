@@ -9,11 +9,17 @@ const mongoose = require('mongoose');
 const compression = require('compression');
 const helmet = require('helmet');
 
+const webpackDevMiddleware = require('webpack-dev-middleware');
+const webpack = require('webpack');
+const webpackConfig = require('./webpack.config');
+
 require('dotenv').config();
 
 const routes = require('./routes');
 
 const app = express();
+const compiler = webpack(webpackConfig);
+
 
 mongoose.connect(process.env.MONGODB_URI);
 const db = mongoose.connection;
@@ -23,6 +29,10 @@ db.once('open', () => console.log('connected to mongodb'));
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+
+app.use(webpackDevMiddleware(compiler, {
+  publicPath: '/'
+}));
 
 app.use(helmet());
 app.use(compression());

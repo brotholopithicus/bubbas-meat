@@ -1,13 +1,11 @@
 extends layout
 
 block stylesheets
+  link(rel='stylesheet', href='/reviews.bundle.css')
 
 block content
   include partials/header
   .reviews.container
-    .quote-container
-      p#quote
-        span.fadeIn
     .reviews-container
       each review in reviews
         .review(data-event=review)
@@ -22,5 +20,7 @@ block content
           h3 NOTHING HERE. 
           p This world is a vacuous empty pit of despair with nothing novel or exciting ever happening.
 
+  include partials/swansonquote
+
 block scripts
-  script(src='/js/reviews.js')
+  script(src='/reviews.bundle.js')

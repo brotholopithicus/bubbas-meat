@@ -1,26 +1,50 @@
 const path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: {
+    home: './src/home',
+    services: './src/services',
+    reviews: './src/reviews'
+  },
   output: {
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'public')
   },
   module: {
     rules: [{
         test: /\.js$/,
         exclude: /node_modules/,
-        use: {
+        use: [{
           loader: 'babel-loader',
           options: {
             presets: ['env']
           }
-        }
+        }]
       },
       {
-        test: /\.svg$/,
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [{ loader: 'css-loader', options: { importLoaders: 1 } }, 'postcss-loader']
+        })
+      },
+      {
+        test: /\.(jpg|jpeg|svg)$/,
         loader: 'url-loader'
       }
     ]
+  },
+  plugins: [
+    new ExtractTextPlugin('[name].bundle.css')
+  ],
+  devServer: {
+    compress: true,
+    port: 9000,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000'
+      }
+    }
   }
 }

@@ -1,21 +1,21 @@
 import arrowLeft from './arrow-left.svg';
 import arrowRight from './arrow-right.svg';
 
-export default class Siema {
+export default class Slideify {
   /**
-   * Create a Siema.
+   * Create a Slideify.
    * @param {Object} options - Optional settings object.
    */
   constructor(options) {
     // Merge defaults with user's settings
-    this.config = Siema.mergeSettings(options);
+    this.config = Slideify.mergeSettings(options);
 
     // Create global references
     this.selector = typeof this.config.selector === 'string' ? document.querySelector(this.config.selector) : this.config.selector;
     this.selectorWidth = this.selector.offsetWidth;
     this.innerElements = [].slice.call(this.selector.children);
     this.currentSlide = this.config.startIndex;
-    this.transformProperty = Siema.webkitOrNot();
+    this.transformProperty = Slideify.webkitOrNot();
 
     // Bind all event handlers for referencability
     ['resizeHandler', 'touchstartHandler', 'touchendHandler', 'touchmoveHandler', 'mousedownHandler', 'mouseupHandler', 'mouseleaveHandler', 'mousemoveHandler'].forEach(method => {
@@ -30,11 +30,11 @@ export default class Siema {
   /**
    * Overrides default settings with custom ones.
    * @param {Object} options - Optional settings object.
-   * @returns {Object} - Custom Siema settings.
+   * @returns {Object} - Custom Slideify settings.
    */
   static mergeSettings(options) {
     const settings = {
-      selector: '.siema',
+      selector: '.Slideify',
       duration: 200,
       easing: 'ease-out',
       perPage: 1,
