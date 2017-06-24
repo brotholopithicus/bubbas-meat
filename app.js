@@ -9,10 +9,6 @@ const mongoose = require('mongoose');
 const compression = require('compression');
 const helmet = require('helmet');
 
-const webpackDevMiddleware = require('webpack-dev-middleware');
-const webpack = require('webpack');
-const webpackConfig = require('./webpack.config');
-
 require('dotenv').config();
 
 const routes = require('./routes');
@@ -30,6 +26,9 @@ app.set('view engine', 'pug');
 
 morgan(process.env.NODE_ENV);
 if (process.env.NODE_ENV === 'development') {
+  const webpackDevMiddleware = require('webpack-dev-middleware');
+  const webpack = require('webpack');
+  const webpackConfig = require('./webpack.config');
   morgan('Starting webpack-dev-middleware...');
   app.use(webpackDevMiddleware(webpack(webpackConfig), {
     publicPath: '/'
