@@ -139,6 +139,9 @@ export default class Slideify {
     // Go to currently active slide after initial build
     this.slideToCurrent();
     this.config.onInit.call(this);
+
+    // create and append buttons
+    this.createButtons('transparent');
   }
 
 

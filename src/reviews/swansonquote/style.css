@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css?family=Permanent+Marker');
-
 .quote-container {
   font-family: 'Permanent Marker', system-ui, sans-serif;
   background-color: rebeccapurple;
@@ -8,8 +7,6 @@
   overflow: hidden;
   display: flex;
   flex-direction: row;
-
-
   & .quote-image {
     flex: 0 0 640px;
     overflow: hidden;
@@ -25,7 +22,7 @@
     align-items: center;
     padding: 1rem 2rem;
     text-align: center;
-    color: whitesmoke;
+    color: #e7e7e7;
     line-height: 1.75rem;
     font-size: 1.5rem;
   }
@@ -36,11 +33,50 @@
 }
 
 .fadeInOut {
-  animation: fadeInOut 2.5s infinite alternate ease-in;
+  animation: fadeInOut 2.5s infinite alternate ease;
 }
 
 @keyframes fadeInOut {
   to {
     opacity: 1;
+  }
+}
+
+@media (width <=1200px) {
+  .quote-container {
+    height: 200px;
+    & .quote-image {
+      flex: 0 0 320px;
+    }
+    & .quote-text {
+      line-height: 1.25rem;
+      font-size: 1rem;
+    }
+  }
+}
+
+@media (width <=900px) {
+  .quote-container {
+    height: 169px;
+    & .quote-image {
+      flex: 0 0 270px;
+    }
+    & .quote-text {
+      line-height: 1rem;
+      font-size: 0.9rem;
+    }
+  }
+}
+
+@media (width <=736px) {
+  .quote-container {
+    height: 110px;
+    & .quote-image {
+      flex: 0 0 175px;
+    }
+    & .quote-text {
+      line-height: 0.925rem;
+      font-size: 0.75rem;
+    }
   }
 }

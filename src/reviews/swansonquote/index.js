@@ -3,7 +3,7 @@ import quotes from './quotes';
 import images from './images';
 
 function QuoteGenerator() {
-  this.intervalDuration = 5000;
+  this.intervalDuration = 8000;
   this.componentContainer = document.querySelector('.quote-container');
   this.quoteImage = document.querySelector('.quote-image');
   this.quoteText = document.querySelector('.quote-text');

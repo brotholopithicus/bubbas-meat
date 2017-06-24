@@ -1,3 +1,5 @@
+import Slideify from './slideify';
+
 const slider = new Slideify({
   selector: '.slider',
   duration: 200,
@@ -10,5 +12,3 @@ const slider = new Slideify({
   onInit: () => {},
   onChange: () => {},
 });
-
-slider.createButtons('transparent');

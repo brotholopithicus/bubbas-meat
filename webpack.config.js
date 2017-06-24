@@ -4,6 +4,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
   entry: {
     home: './src/home',
+    about: './src/about',
     services: './src/services',
     reviews: './src/reviews'
   },
