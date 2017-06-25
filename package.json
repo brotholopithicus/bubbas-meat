@@ -6,7 +6,7 @@
     "start": "node ./bin/www",
     "dev": "DEBUG=bubbas-meat:* node ./bin/www",
     "dev:nodemon": "DEBUG=bubbas-meat:* nodemon ./bin/www --ignore 'public/js/*.js'",
-    "build": "webpack -p"
+    "build": "webpack -p --progress"
   },
   "dependencies": {
     "body-parser": "~1.17.1",

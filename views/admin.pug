@@ -1,7 +1,7 @@
 extends layout
 
 block stylesheets
-  link(rel='stylesheet', href='https://unpkg.com/flatpickr/dist/flatpickr.min.css')
+  link(rel='stylesheet', href='/css/admin.bundle.css')
 
 block content
   include partials/header
@@ -72,5 +72,4 @@ block content
         button.submit(disabled) Submit
 
 block scripts
-  script(src='https://unpkg.com/flatpickr')
-  script(src='/js/admin.js')
+  script(src='/js/admin.bundle.js')

@@ -3,7 +3,14 @@ Primary style
 -------------------------------- */
 
 @import url('https://fonts.googleapis.com/css?family=Arvo|Slabo+27px');
-@import url(../fonts/industry_inc/font.css);
+@font-face {
+  font-family: 'IndustryInc-Base';
+  font-weight: normal;
+  font-style: normal;
+  src: url('./fonts/industry_inc/IndustryInc-Base.woff') format('woff'), url('./fonts/industry_inc/IndustryInc-Base.ttf') format('truetype');
+  /*src: url('./fonts/industry_inc/IndustryInc-Base.svg#IndustryInc-Base') format('svg');*/
+}
+
 :root {
   font-size: calc(1vw + 1vh + .5vmin);
   --header-bg-color: #512C2F;
@@ -18,7 +25,7 @@ Primary style
 
 body {
   color: #1f1f1f;
-  font: 1rem/1.6 'IndustryInc-Base', sans-serif;
+  font: 1em/1.6 'IndustryInc-Base', sans-serif;
 }
 
 body.modal-active {
@@ -110,9 +117,40 @@ Main Components
   overflow: hidden;
   z-index: -100;
   /* fallback for bg-video */
-  background: url('../imgs/main-bg-fallback.jpeg') no-repeat center center;
+  background-repeat: no-repeat;
+  background-position: center center;
   background-size: cover;
   background-attachment: fixed;
+}
+
+@media(width<=740px) {
+  .fullscreen-bg {
+    background-image: url('/imgs/bg-fallback_740.jpeg');
+  }
+}
+
+@media(width>740px) and (width <=900px) {
+  .fullscreen-bg {
+    background-image: url('/imgs/bg-fallback_900.jpeg');
+  }
+}
+
+@media (width>900px) and (width <=1280px) {
+  .fullscreen-bg {
+    background-image: url('/imgs/bg-fallback_1280.jpeg');
+  }
+}
+
+@media(width>1280px) and (width <=1440px) {
+  .fullscreen-bg {
+    background-image: url('/imgs/bg-fallback_1440.jpeg');
+  }
+}
+
+@media (width > 1440px) and (width <=1920px) {
+  .fullscreen-bg {
+    background-image: url('/imgs/bg-fallback_1920.jpeg');
+  }
 }
 
 .bg-video {
@@ -257,7 +295,7 @@ Home Page
   height: 100vh;
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.24);
-  /*background: url(../imgs/smoking_meat.jpeg) no-repeat center center;
+  /*background: url(imgs/smoking_meat.jpeg) no-repeat center center;
   background-attachment: fixed;
   background-size: cover;*/
 }
@@ -387,7 +425,7 @@ form button.submit:active {
 }
 
 form [required] {
-  background: url(../imgs/svgs/required2.svg) no-repeat top right;
+  background: url(./imgs/svgs/required2.svg) no-repeat top right;
 }
 
 form .error {
@@ -395,7 +433,7 @@ form .error {
 }
 
 form .success {
-  background: url(../imgs/svgs/check.svg) no-repeat center right;
+  background: url(./imgs/svgs/check.svg) no-repeat center right;
 }
 
 form input, form textarea, form [required] {

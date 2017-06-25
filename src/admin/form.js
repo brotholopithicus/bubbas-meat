@@ -1,3 +1,5 @@
+import flatpickr from './flatpickr';
+
 const flatpickr_input = flatpickr('.flatpickr', { enableTime: true, minDate: Date.now() });
 
 function Form() {
