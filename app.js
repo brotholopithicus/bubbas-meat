@@ -28,9 +28,7 @@ if (process.env.NODE_ENV === 'development') {
   const webpackDevMiddleware = require('webpack-dev-middleware');
   const webpack = require('webpack');
   const webpackConfig = require('./webpack.config');
-  app.use(webpackDevMiddleware(webpack(webpackConfig), {
-    publicPath: '/'
-  }));
+  app.use(webpackDevMiddleware(webpack(webpackConfig), { publicPath: '/' }));
 }
 
 app.use(helmet());

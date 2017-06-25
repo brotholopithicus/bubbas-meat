@@ -10,7 +10,7 @@ function QuoteGenerator() {
 
   [this.quoteImage, this.quoteText].forEach(element => {
     element.classList.add('fadeInOut');
-    element.style.animationDuration = `${this.intervalDuration / 2}ms`;
+    element.style.animationDuration = `${this.intervalDuration}ms`;
   });
 
   this.images = images;
