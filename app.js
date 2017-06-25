@@ -24,12 +24,10 @@ db.once('open', () => console.log('connected to mongodb'));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-morgan(process.env.NODE_ENV);
 if (process.env.NODE_ENV === 'development') {
   const webpackDevMiddleware = require('webpack-dev-middleware');
   const webpack = require('webpack');
   const webpackConfig = require('./webpack.config');
-  morgan('Starting webpack-dev-middleware...');
   app.use(webpackDevMiddleware(webpack(webpackConfig), {
     publicPath: '/'
   }));

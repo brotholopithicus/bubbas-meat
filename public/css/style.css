@@ -109,6 +109,10 @@ Main Components
   right: 0;
   overflow: hidden;
   z-index: -100;
+  /* fallback for bg-video */
+  background: url('../imgs/main-bg-fallback.jpeg') no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 .bg-video {
@@ -893,7 +897,7 @@ Reviews Page
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  border-right: 0.5rem solid #e2e2e2;
+  border-right: 0.5rem solid #ababab;
 }
 
 .review .text {
@@ -908,6 +912,7 @@ Reviews Page
 .review .text cite {
   font-size: 0.6rem;
 }
+
 
 /* --------------------------------
 Admin Page

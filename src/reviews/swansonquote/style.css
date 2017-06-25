@@ -23,7 +23,7 @@
     padding: 1rem 2rem;
     text-align: center;
     color: #e7e7e7;
-    line-height: 1.75rem;
+    line-height: 1;
     font-size: 1.5rem;
   }
 }
@@ -49,7 +49,6 @@
       flex: 0 0 320px;
     }
     & .quote-text {
-      line-height: 1.25rem;
       font-size: 1rem;
     }
   }
@@ -62,7 +61,6 @@
       flex: 0 0 270px;
     }
     & .quote-text {
-      line-height: 1rem;
       font-size: 0.9rem;
     }
   }
@@ -75,7 +73,6 @@
       flex: 0 0 175px;
     }
     & .quote-text {
-      line-height: 0.925rem;
       font-size: 0.75rem;
     }
   }
