@@ -1,0 +1,14 @@
+@font-face {
+  font-family: 'IndustryInc-Base';
+  font-weight: normal;
+  font-style: normal;
+  src: url('../../assets/fonts/industry_inc/IndustryInc-Base.woff') format('woff'), url('../../assets/fonts/industry_inc/IndustryInc-Base.ttf') format('truetype');
+  /*src: url('../../assets/fonts/industry_inc/IndustryInc-Base.svg#IndustryInc-Base') format('svg');*/
+}
+
+@font-face {
+  font-family: 'industry_inc';
+  font-weight: normal;
+  font-style: normal;
+  src: url('../../assets/fonts/industry_inc/industry_inc.eot'), url('../../assets/fonts/industry_inc/industry_inc.woff2') format('woff2'), url('../../assets/fonts/industry_inc/industry_inc.eot?#iefix') format('embedded-opentype');
+}
