@@ -1,9 +1,5 @@
 function App() {
-  this.currentPath = window.location.pathname;
-  if (this.currentPath === '/') {
-    this.socialMediaLinks = document.querySelector('.links');
-    this.socialMediaLinks.style.display = 'none';
-  } else {
+  if (window.location.pathname !== '/') {
     this.nav = document.querySelector('.nav-overlay');
     this.navToggle = document.querySelector('.nav-toggle');
     this.navIcon = document.querySelector('.nav-icon');
