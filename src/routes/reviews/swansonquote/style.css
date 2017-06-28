@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Permanent+Marker');
+
 .quote-container {
   font-family: 'Permanent Marker', system-ui, sans-serif;
-  background-color: rebeccapurple;
+  background-color: dimgray;
   width: 100%;
   height: 400px;
   overflow: hidden;

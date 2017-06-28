@@ -19,7 +19,7 @@ Reviews Page
   width: 100%;
   display: grid;
   grid-template-columns: max-content 1fr;
-  border-right: 0.5rem solid #ababab;
+  border-right: 0.5rem solid dimgray;
   & .image {
     width: 50px;
     height: 50px;
