@@ -1,5 +1,8 @@
 extends layout
 
+block stylesheets
+  link(rel='stylesheet', href='/css/index.bundle.css')
+
 block content
   .fullscreen-bg
     video.bg-video(loop, muted, autoplay)
@@ -14,4 +17,4 @@ block content
       a(href='/contact') Contact
 
 block scripts
-  script(src='/js/home.bundle.js')
+  script(src='/js/index.bundle.js')

@@ -1,11 +1,11 @@
 extends layout
 
 block stylesheets
-
+  link(rel='stylesheet', href='/css/contact.bundle.css')
 block content
   include partials/header
   .contact-container.sub-container
     include partials/contact_form
 
 block scripts
-  script(src='/js/form.bundle.js')
+  script(src='/js/contact.bundle.js')

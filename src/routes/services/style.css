@@ -1,0 +1,67 @@
+/* --------------------------------
+Services Page
+-------------------------------- */
+
+.services-container {
+  font-family: 'Arvo', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #1f1f1f;
+}
+
+.text-container {
+  width: 40%;
+}
+
+.text-container h2 {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  margin: 0.5rem auto;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #000;
+}
+
+.event-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  font-size: 0.65rem;
+}
+
+.event-list div {
+  background-color: #fff;
+  text-align: center;
+}
+
+.carousel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  max-width: 20rem;
+  margin: 1rem auto;
+}
+
+.slider {
+  margin: 0;
+  position: relative;
+}
+
+.slider img {
+  width: 100%;
+  height: auto;
+}
+
+.carousel span {
+  transition: 0.2s;
+}
+
+.carousel span:hover {
+  transform: scale(1.1);
+}
+
+@media(min-width: 800px) {
+  .carousel {
+    width: 40%;
+  }
+}

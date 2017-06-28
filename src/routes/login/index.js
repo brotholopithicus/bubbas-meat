@@ -1,3 +1,5 @@
+import './style.css';
+
 function Form() {
   this.initialize = () => {
     this.submitButton = document.querySelector('button.submit');

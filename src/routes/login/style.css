@@ -1,0 +1,211 @@
+
+/* --------------------------------
+  Contact Page
+  -------------------------------- */
+
+.contact-container, .admin-container {
+  color: #2b3e51;
+  overflow-y: auto;
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  flex: 1;
+  width: 90%;
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+fieldset {
+  border: none;
+  margin-top: 24px;
+  padding: 0;
+}
+
+legend, .form-control.form-textarea .form-label {
+  margin-bottom: 20px;
+  font-size: 1.25rem;
+  width: 100%;
+  border-bottom: 1px solid #d4d4d4;
+  text-align: left;
+}
+
+.form-control {
+  margin-bottom: 1em;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.form-control.form-textarea {
+  flex-direction: column;
+}
+
+.form-control .form-label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 25vmin;
+  padding-top: 0.3rem;
+}
+
+.form-control .form-input {
+  flex: 1;
+  padding: 4px 8px;
+  font-family: 'Open Sans', sans-serif;
+  color: #2b3e51;
+  width: 100%;
+  border: 1px solid rgba(43, 62, 82, 0.5);
+  border-radius: 0.15em;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+form input:focus, form textarea:focus {
+  outline: none;
+  border-color: #1d2a37;
+  box-shadow: 0 0 5px rgba(44, 151, 222, 0.2);
+}
+
+.form-control.form-textarea textarea {
+  min-height: 20vmin;
+  resize: vertical;
+  overflow: auto;
+}
+
+form button.submit {
+  margin: 0 auto;
+  font-size: 0.75rem;
+  background: #2b3e51;
+  color: #fff;
+}
+
+form button.submit:hover {
+  background: #3a4e62;
+}
+
+form button.submit:focus {
+  outline: none;
+  background: #2b3e51;
+}
+
+form button.submit:active {
+  transform: scale(0.9);
+}
+
+form [required] {
+  background: url('../../assets/svgs/required2.svg') no-repeat top right;
+}
+
+form .error {
+  border-color: #e94b35 !important;
+}
+
+form .success {
+  background: url('../../assets/svgs/check.svg') no-repeat center right;
+}
+
+form input, form textarea, form [required] {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.form-control.form-textarea {
+  margin-top: 20px;
+  padding-top: 10px;
+}
+
+.form-control .form-input::-webkit-input-placeholder {
+  color: rgba(43, 62, 82, 0.5);
+}
+
+.form-control-link {
+  font-size: 0.5rem;
+  font-family: 'Arvo', sans-serif;
+  justify-content: center;
+}
+
+#link-toggle {
+  font-size: 0.5rem;
+  padding: 0rem 0.25rem;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.2);
+  transition: 0.2s;
+  border-radius: 0.1rem;
+}
+
+#link-toggle:hover {
+  transform: scale(1.05);
+}
+
+
+
+/* --------------------------------
+Loader
+-------------------------------- */
+
+.message {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.message-symbol {
+  font-size: 15rem;
+  text-shadow: 0px 0px 15px rgba(89, 89, 89, 1);
+}
+
+.loader {
+  margin: 100px auto;
+  font-size: 25px;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  position: relative;
+  text-indent: -9999em;
+  animation: load5 1.1s infinite ease;
+  transform: translateZ(0);
+}
+
+@keyframes load5 {
+  0%, 100% {
+    box-shadow: 0em -2.6em 0em 0em #ffffff, 1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2), 2.5em 0em 0 0em rgba(255, 255, 255, 0.2), 1.75em 1.75em 0 0em rgba(255, 255, 255, 0.2), 0em 2.5em 0 0em rgba(255, 255, 255, 0.2), -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.2), -2.6em 0em 0 0em rgba(255, 255, 255, 0.5), -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.7);
+  }
+  12.5% {
+    box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.7), 1.8em -1.8em 0 0em #ffffff, 2.5em 0em 0 0em rgba(255, 255, 255, 0.2), 1.75em 1.75em 0 0em rgba(255, 255, 255, 0.2), 0em 2.5em 0 0em rgba(255, 255, 255, 0.2), -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.2), -2.6em 0em 0 0em rgba(255, 255, 255, 0.2), -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.5);
+  }
+  25% {
+    box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.5), 1.8em -1.8em 0 0em rgba(255, 255, 255, 0.7), 2.5em 0em 0 0em #ffffff, 1.75em 1.75em 0 0em rgba(255, 255, 255, 0.2), 0em 2.5em 0 0em rgba(255, 255, 255, 0.2), -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.2), -2.6em 0em 0 0em rgba(255, 255, 255, 0.2), -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2);
+  }
+  37.5% {
+    box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.2), 1.8em -1.8em 0 0em rgba(255, 255, 255, 0.5), 2.5em 0em 0 0em rgba(255, 255, 255, 0.7), 1.75em 1.75em 0 0em #ffffff, 0em 2.5em 0 0em rgba(255, 255, 255, 0.2), -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.2), -2.6em 0em 0 0em rgba(255, 255, 255, 0.2), -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.2), 1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2), 2.5em 0em 0 0em rgba(255, 255, 255, 0.5), 1.75em 1.75em 0 0em rgba(255, 255, 255, 0.7), 0em 2.5em 0 0em #ffffff, -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.2), -2.6em 0em 0 0em rgba(255, 255, 255, 0.2), -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2);
+  }
+  62.5% {
+    box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.2), 1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2), 2.5em 0em 0 0em rgba(255, 255, 255, 0.2), 1.75em 1.75em 0 0em rgba(255, 255, 255, 0.5), 0em 2.5em 0 0em rgba(255, 255, 255, 0.7), -1.8em 1.8em 0 0em #ffffff, -2.6em 0em 0 0em rgba(255, 255, 255, 0.2), -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2);
+  }
+  75% {
+    box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.2), 1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2), 2.5em 0em 0 0em rgba(255, 255, 255, 0.2), 1.75em 1.75em 0 0em rgba(255, 255, 255, 0.2), 0em 2.5em 0 0em rgba(255, 255, 255, 0.5), -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.7), -2.6em 0em 0 0em #ffffff, -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2);
+  }
+  87.5% {
+    box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.2), 1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2), 2.5em 0em 0 0em rgba(255, 255, 255, 0.2), 1.75em 1.75em 0 0em rgba(255, 255, 255, 0.2), 0em 2.5em 0 0em rgba(255, 255, 255, 0.2), -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.5), -2.6em 0em 0 0em rgba(255, 255, 255, 0.7), -1.8em -1.8em 0 0em #ffffff;
+  }
+}

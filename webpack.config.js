@@ -12,10 +12,10 @@ module.exports = {
   entry: {
     admin: './src/routes/admin',
     layout: './src/routes/layout',
-    home: './src/routes/home',
+    index: './src/routes/index',
     about: './src/routes/about',
     events: './src/routes/events',
-    form: './src/routes/form',
+    contact: './src/routes/contact',
     login: './src/routes/login',
     services: './src/routes/services',
     reviews: './src/routes/reviews'

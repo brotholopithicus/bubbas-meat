@@ -1,3 +1,5 @@
+import './style.css';
+
 const events = document.querySelectorAll('.event');
 
 events.forEach(evt => {

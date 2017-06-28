@@ -1,0 +1,9 @@
+#!/bin/bash
+
+a=1
+for i in ./*.jpg; do
+	new=$(printf "image%04d.jpeg" "$a")
+	mv -i -- "$i" "renamed/$new"
+	let a=a+1
+done
+

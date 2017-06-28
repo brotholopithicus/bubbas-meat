@@ -1,5 +1,7 @@
-import videoMP4 from '@/assets/videos/video0001_loop.mp4';
-import videoWEBM from '@/assets/videos/video0001_loop.webm';
+import './style.css';
+import videoMP4 from '@/assets/videos/video.mp4';
+import videoWEBM from '@/assets/videos/video.webm';
+import videoBackground from '@/assets/videos/video-background.jpeg';
 import circleLogo from '@/assets/svgs/logo_with_circle.svg';
 
 function App() {
@@ -16,6 +18,9 @@ function App() {
     this.bgVideo.appendChild(source);
   }
   this.initialize = () => {
+    this.videoBackground = document.createElement('img');
+    this.videoBackground.src = videoBackground;
+    this.bgVideo.appendChild(this.videoBackground);
     this.videos.forEach(video => this.createVideoSource(video.file, video.type));
     this.logoEl.src = circleLogo;
   }

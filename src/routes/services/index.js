@@ -1,4 +1,5 @@
-import { images } from './images';
+import './style.css';
+import images from './images';
 import Slideify from './slideify';
 
 const imageContainer = document.querySelector('.slider');
@@ -19,6 +20,8 @@ const slider = new Slideify({
   startIndex: 0,
   draggable: true,
   threshold: 20,
+  interval: true,
+  buttonStyle: 'transparent',
   loop: true,
   onInit: () => {},
   onChange: () => {},

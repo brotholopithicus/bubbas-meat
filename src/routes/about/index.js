@@ -1,3 +1,4 @@
+import './style.css';
 import {thumbs} from './images';
 import FullScreenImage from './fullscreen-image';
 

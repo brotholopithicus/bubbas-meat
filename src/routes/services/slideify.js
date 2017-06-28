@@ -42,6 +42,9 @@ export default class Slideify {
       draggable: true,
       threshold: 20,
       loop: false,
+      intervalLength: 2000,
+      interval: false,
+      buttonStyle: 'transparent',
       onInit: () => {},
       onChange: () => {},
     };
@@ -141,7 +144,12 @@ export default class Slideify {
     this.config.onInit.call(this);
 
     // create and append buttons
-    this.createButtons('transparent');
+    this.createButtons(this.config.buttonStyle);
+
+    // set interval
+    if (this.config.interval) {
+      this.interval = setInterval(() => this.next(), this.config.intervalLength);
+    }
   }
 
 
@@ -531,9 +539,14 @@ export default class Slideify {
 
     this.setButtonPositions();
 
-    this.prevButton.addEventListener('click', () => this.prev());
-    this.nextButton.addEventListener('click', () => this.next());
-
+    this.prevButton.addEventListener('click', () => {
+      clearInterval(this.interval);
+      this.prev();
+    });
+    this.nextButton.addEventListener('click', () => {
+      clearInterval(this.interval);
+      this.next();
+    });
   }
   setButtonPositions() {
     const pos = (window.innerWidth - this.selector.offsetWidth) / 4;
