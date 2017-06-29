@@ -10,7 +10,7 @@ function resolve(dir) {
 }
 module.exports = {
   entry: {
-    admin: './src/routes/admin',
+    admin: ['babel-polyfill', './src/routes/admin'],
     layout: './src/routes/layout',
     index: './src/routes/index',
     about: './src/routes/about',

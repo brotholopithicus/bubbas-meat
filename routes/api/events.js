@@ -12,12 +12,15 @@ router.get('/', (req, res, next) => {
 });
 
 /* POST create / update event. */
-router.post('/new', auth.required, (req, res, next) => {
+router.post('/', auth.required, (req, res, next) => {
   if (!req.body) return res.sendStatus(404);
   const data = {
     title: req.body.title,
     description: req.body.description,
-    date: req.body.date,
+    date:{
+      start: req.body.startDate,
+      end: req.body.endDate
+    },
     location: {
       address: {
         street: req.body.address,
@@ -25,7 +28,8 @@ router.post('/new', auth.required, (req, res, next) => {
         state: req.body.state,
         zip: req.body.zip
       }
-    }
+    },
+    expireAt: req.body.endDate
   }
 
   if (req.body.url && req.body.text) {
@@ -34,9 +38,14 @@ router.post('/new', auth.required, (req, res, next) => {
       text: req.body.text
     }
   }
-  Event.findOneAndUpdate({ title: data.title }, data, { upsert: true }, (err, doc) => {
+
+  if(req.body.repeat) {
+    data.date.repeat = req.body.repeat;
+  }
+
+  Event.findOneAndUpdate({ title: data.title }, data, { upsert: true, new: true }, (err, event) => {
     if (err) return next(err);
-    return res.json({ message: 'SUCCESS', doc });
+    return res.json({ message: 'OK', event });
   });
 });
 

@@ -1,136 +1,38 @@
 import flatpickr from './flatpickr';
-
-const flatpickr_input = flatpickr('.flatpickr', { enableTime: true, minDate: Date.now() });
+import requestify from './requestify';
 
 function Form() {
   this.initialize = () => {
     this.submitButton = document.querySelector('button.submit');
-
+    this.date = {
+      startDate: flatpickr('#startDate', { enableTime: true, minDate: Date.now() }),
+      endDate: flatpickr('#endDate', { enableTime: true, minDate: Date.now() })
+    }
     this.form = document.querySelector('form');
     this.title = document.querySelector('input#title');
     this.description = document.querySelector('input#description');
-    this.date = document.querySelector('input#date');
+    this.startDate = document.querySelector('input#startDate');
+    this.endDate = document.querySelector('input#endDate');
     this.address = document.querySelector('input#address');
     this.city = document.querySelector('input#city');
     this.state = document.querySelector('input#state');
     this.zip = document.querySelector('input#zip');
-
-    this.formControlLink = document.querySelector('.form-control-link');
-
-    this.linkToggle = this.formControlLink.querySelector('#link-toggle');
-    this.linkToggle.addEventListener('click', this.addLink);
-
     this.link = document.querySelector('input#url');
     this.linkText = document.querySelector('input#text');
-
-    this.linkInputs = document.querySelector('.link-inputs');
-    this.linkInputs.style.display = 'none';
-
-    this.numLinks = 0;
-
-    this.formInputs = this.form.querySelectorAll('.form-input');
-    this.formInputs.forEach(input => input.addEventListener('change', this.formInputHandler));
-    this.formInputs.forEach(input => input.addEventListener('keyup', this.formInputHandler));
-
     this.submitButton.addEventListener('click', this.submitForm);
-
-    this.modifier = 2;
-
-    this.formReady = false;
     this.formSubmitted = false;
-  }
-  this.addLink = (e) => {
-    this.modifier = 0;
-    this.linkInputs.style.display = 'block';
-    this.formControlLink.style.display = 'none';
-  }
-  this.hideLink = () => {
-    this.modifier = 2;
-    this.linkInputs.style.display = 'none';
-    this.formControlLink.style.display = 'flex';
-  }
-  this.formInputHandler = (e) => {
-    this.formSwitch(e.target);
-    this.checkFormSubmitReady();
-    if (this.formReady) {
-      this.submitButton.disabled = false;
-    }
-  }
-  this.checkFormSubmitReady = () => {
-    console.log(this.formInputs.length - this.modifier);
-    console.log(this.form.querySelectorAll('.success').length);
-    if (this.form.querySelectorAll('.success').length === this.formInputs.length - this.modifier) {
-      this.submitButton.disabled = false;
-    } else {
-      this.submitButton.disabled = true;
-    }
-  }
-  this.formSwitch = (target) => {
-    let id = target.id;
-    let value = target.value;
-    let valid = false;
-    switch (id) {
-      case 'title':
-        if (value.length) valid = true;
-        break;
-      case 'description':
-        if (value.length) valid = true;
-        break;
-      case 'date':
-        if (value.length) valid = true;
-        break;
-      case 'address':
-        if (value.length) valid = true;
-        break;
-      case 'city':
-        if (value.length) valid = true;
-        break;
-      case 'state':
-        if (value.length) valid = true;
-        break;
-      case 'zip':
-        if (value.length) valid = true;
-        break;
-      case 'url':
-        if (value.length) {
-          try {
-            const url = new URL(value);
-            valid = true;
-          } catch (e) {
-            valid = false;
-          }
-        }
-        break;
-      case 'text':
-        if (value.length) valid = true;
-        break;
-      default:
-        console.log('default!');
-        valid = true;
-        break;
-    }
-    return this.modifyElementStatus(target, valid);
-  }
-  this.modifyElementStatus = (target, valid) => {
-    if (valid) {
-      target.classList.remove('error');
-      target.classList.add('success');
-      target.required = false;
-    } else {
-      target.classList.add('error');
-      target.classList.remove('success');
-      target.required = true;
-    }
-    return valid;
+    this.formInputs = document.querySelectorAll('input');
+
+    this.startDate.addEventListener('change', () => this.date.endDate.setDate(this.startDate.value));
   }
   this.submitForm = (e) => {
     e.preventDefault();
     if (this.formSubmitted) return;
-    this.createMessageSpan();
     this.formSubmitted = true;
     let formData = {};
     this.formInputs.forEach(input => {
       formData[input.id] = input.value
+      input.value = '';
     });
 
     const options = {
@@ -139,54 +41,12 @@ function Form() {
       data: JSON.stringify(formData)
     }
 
-    this.requestify('/api/events/new', options).then(JSON.parse).then(res => {
-      if (res.message === 'SUCCESS') {
-        this.displayResultMessage('&#10003;', 'rgb(90, 191, 13)');
-        setTimeout(() => {
-          window.location.reload();
-        }, 800);
-      } else {
-        this.displayResultMessage('&times;', 'rgb(245, 73, 73)');
-        setTimeout(() => {
-          this.formSubmitted = false;
-          document.body.removeChild(this.message);
-        }, 800);
-      }
+    requestify('/api/events', options).then(JSON.parse).then(res => {
+      console.log(res);
+      // const update = document.querySelector(`.event#${res.event._id}`);
+      renderElement(res.event);
     });
 
-  }
-  this.createMessageSpan = () => {
-    this.message = document.createElement('span');
-    this.message.classList.add('message');
-    document.body.appendChild(this.message);
-
-    this.messageSymbol = document.createElement('span');
-    this.messageSymbol.classList.add('loader');
-    this.message.appendChild(this.messageSymbol);
-  }
-  this.displayResultMessage = (symbol, color) => {
-    this.messageSymbol.classList.remove('loader');
-    this.messageSymbol.classList.add('message-symbol');
-    this.messageSymbol.innerHTML = symbol;
-    this.messageSymbol.style.color = color;
-    this.messageSymbol.classList.add('message-symbol');
-  }
-
-  this.requestify = (url, options) => {
-    return new Promise((resolve, reject) => {
-      const req = new XMLHttpRequest();
-      req.open(options.method, url);
-      if (typeof options.headers !== 'undefined') options.headers.forEach(header => req.setRequestHeader(header.name, header.value));
-      req.onload = () => {
-        if (req.status >= 200 && req.status < 300) {
-          resolve(req.response);
-        } else {
-          reject(Error(req.statusText));
-        }
-      }
-      req.onerror = () => reject({ status: req.status, statusText: req.statusText });
-      req.send(options.data);
-    });
   }
 }
 
@@ -243,19 +103,55 @@ function deleteClickHandler(e) {
   });
 }
 
-function requestify(url, options) {
-  return new Promise((resolve, reject) => {
-    const req = new XMLHttpRequest();
-    req.open(options.method, url);
-    if (typeof options.headers !== 'undefined') options.headers.forEach(header => req.setRequestHeader(header.name, header.value));
-    req.onload = () => {
-      if (req.status >= 200 && req.status < 300) {
-        resolve(req.response);
-      } else {
-        reject(Error(req.statusText));
-      }
-    }
-    req.onerror = () => reject({ status: req.status, statusText: req.statusText });
-    req.send(options.data);
-  });
+function createElement(tagName, options) {
+  const el = document.createElement(tagName);
+  if (typeof options.classList !== 'undefined') el.classList.add(...options.classList);
+  if (typeof options.text !== 'undefined') el.textContent = options.text;
+  if (typeof options.html !== 'undefined') el.innerHTML = options.html;
+  if (typeof options.id !== 'undefined') el.id = options.id;
+  return el;
 }
+
+const eventsContainer = document.querySelector('.events');
+
+function generateEventElements(events) {
+  let elements = [];
+  if (events.length) {
+    for (let i = 0; i < events.length; i++) {
+      const event = createEventElement(events[i], i + 1);
+      elements.push(event);
+    }
+  } else {
+    const emptyEvent = createElement('div', { classList: ['event', 'empty'] });
+    const title = createElement('h4', { text: `There's nothing here.` });
+    emptyEvent.appendChild(title);
+    elements.push(emptyEvent);
+  }
+  return elements;
+}
+
+function createEventElement(eventData, index) {
+  const event = createElement('div', { id: eventData._id, classList: ['event'] });
+  const number = createElement('h4', { text: index + '.' });
+  const title = createElement('h4', { text: eventData.title });
+  const btnContainerOne = createElement('div', { classList: ['btn-container'] });
+  const btnContainerTwo = btnContainerOne.cloneNode();
+  const editButton = createElement('button', { id: 'editEvent', html: '&plus;' });
+  const removeButton = createElement('button', { id: 'removeButton', html: '&times;' });
+  btnContainerOne.appendChild(editButton);
+  btnContainerTwo.appendChild(removeButton);
+  [number, title, btnContainerOne, btnContainerTwo].forEach(child => event.appendChild(child));
+  return event;
+}
+
+function renderElement(element, parent) {
+  parent.appendChild(element);
+}
+
+async function fetchEvents() {
+  const events = await requestify('/api/events', { method: 'GET' });
+  const elements = generateEventElements(JSON.parse(events));
+  elements.forEach(element => renderElement(element, eventsContainer));
+}
+
+window.onload = () => fetchEvents();
