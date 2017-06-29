@@ -5,8 +5,8 @@ function Form() {
   this.initialize = () => {
     this.submitButton = document.querySelector('button.submit');
     this.date = {
-      startDate: flatpickr('#startDate', { enableTime: true, minDate: Date.now() }),
-      endDate: flatpickr('#endDate', { enableTime: true, minDate: Date.now() })
+      startDate: flatpickr('#startDate', { enableTime: true }),
+      endDate: flatpickr('#endDate', { enableTime: true })
     }
     this.form = document.querySelector('form');
     this.title = document.querySelector('input#title');
@@ -15,13 +15,13 @@ function Form() {
     this.endDate = document.querySelector('input#endDate');
     this.address = document.querySelector('input#address');
     this.city = document.querySelector('input#city');
-    this.state = document.querySelector('input#state');
+    this.state = document.querySelector('select#state');
     this.zip = document.querySelector('input#zip');
     this.link = document.querySelector('input#url');
     this.linkText = document.querySelector('input#text');
     this.submitButton.addEventListener('click', this.submitForm);
     this.formSubmitted = false;
-    this.formInputs = document.querySelectorAll('input');
+    this.formInputs = document.querySelectorAll('.form-input');
 
     this.startDate.addEventListener('change', () => this.date.endDate.setDate(this.startDate.value));
   }
@@ -42,59 +42,55 @@ function Form() {
     }
 
     requestify('/api/events', options).then(JSON.parse).then(res => {
-      console.log(res);
-      // const update = document.querySelector(`.event#${res.event._id}`);
-      renderElement(res.event);
+      const empty = document.querySelector('.empty');
+      if (empty) {
+        eventsContainer.removeChild(empty);
+      }
+      const oldElement = document.getElementById(res.event._id);
+      if (oldElement) {
+        const index = parseInt(oldElement.dataset.index);
+        const newElement = createEventElement(res.event, index);
+        eventsContainer.replaceChild(newElement, oldElement);
+      } else {
+        const index = parseInt(eventsContainer.lastChild.dataset.index) + 1;
+        const newElement = createEventElement(res.event, index);
+        renderElement(newElement, eventsContainer);
+      }
+      console.log(this);
+      this.formSubmitted = false;
     });
-
   }
 }
 
 const form = new Form();
 form.initialize();
 
-const deleteButtons = document.querySelectorAll('button#removeEvent');
-deleteButtons.forEach(button => button.addEventListener('click', deleteClickHandler));
-
-const editButtons = document.querySelectorAll('button#editEvent');
-editButtons.forEach(button => button.addEventListener('click', editClickHandler));
-
-function getEventJSONFromParentNode(target) {
-  return JSON.parse(target.parentNode.parentNode.dataset.event);
+function editClickHandler(id) {
+  requestify(`/api/events/${id}`, { method: 'GET' })
+    .then(res => JSON.parse(res).event)
+    .then(event => {
+      console.log(event);
+      form.title.value = event.title;
+      form.description.value = event.description;
+      form.address.value = event.location.address.street;
+      form.city.value = event.location.address.city;
+      form.zip.value = event.location.address.zip;
+      form.date.startDate.setDate(event.date.start);
+      form.date.endDate.setDate(event.date.end);
+      if (event.link) {
+        form.link.value = event.link.url;
+        form.linkText.value = event.link.text;
+      }
+      const stateSelect = form.state.querySelector(`[selected='true']`);
+      if (stateSelect) {
+        stateSelect.selected = false;
+      }
+      form.state.querySelector(`[value='${event.location.address.state}']`).selected = true;
+    })
 }
 
-function editClickHandler(e) {
-  const data = getEventJSONFromParentNode(e.target);
-  form.title.value = data.title;
-  form.description.value = data.description;
-  flatpickr_input.setDate(new Date(data.date));
-  form.address.value = data.location.address.street;
-  form.city.value = data.location.address.city;
-  form.state.value = data.location.address.state;
-  form.zip.value = data.location.address.zip;
-  if (typeof data.link !== 'undefined') {
-    form.addLink();
-    form.link.value = data.link.url;
-    form.linkText.value = data.link.text;
-  } else {
-    if (form.linkInputs) {
-      form.link.value = '';
-      form.linkText.value = '';
-      form.modifyElementStatus(form.link, false);
-      form.modifyElementStatus(form.linkText, false);
-      console.log(form.link);
-      form.hideLink();
-    }
-  }
-  form.formInputs.forEach(input => form.formSwitch(input));
-  form.checkFormSubmitReady();
-}
-
-function deleteClickHandler(e) {
-  console.log('deleting....');
-  const eventId = getEventJSONFromParentNode(e.target)._id;
-  const url = `/api/events/${eventId}`;
-  requestify(url, { method: 'DELETE' }).then(JSON.parse).then(res => {
+function deleteClickHandler(id) {
+  requestify(`/api/events/${id}`, { method: 'DELETE' }).then(JSON.parse).then(res => {
     if (res.message === 'OK') {
       window.location.reload();
     } else {
@@ -105,10 +101,16 @@ function deleteClickHandler(e) {
 
 function createElement(tagName, options) {
   const el = document.createElement(tagName);
+  if (typeof options.dataset !== 'undefined') {
+    for (let key in options.dataset) {
+      el.dataset[key] = options.dataset[key];
+    }
+  }
   if (typeof options.classList !== 'undefined') el.classList.add(...options.classList);
   if (typeof options.text !== 'undefined') el.textContent = options.text;
   if (typeof options.html !== 'undefined') el.innerHTML = options.html;
   if (typeof options.id !== 'undefined') el.id = options.id;
+  if (typeof options.listeners !== 'undefined') options.listeners.forEach(listener => el.addEventListener(listener.event, listener.handler));
   return el;
 }
 
@@ -131,13 +133,13 @@ function generateEventElements(events) {
 }
 
 function createEventElement(eventData, index) {
-  const event = createElement('div', { id: eventData._id, classList: ['event'] });
+  const event = createElement('div', { id: eventData._id, classList: ['event'], dataset: { index } });
   const number = createElement('h4', { text: index + '.' });
   const title = createElement('h4', { text: eventData.title });
   const btnContainerOne = createElement('div', { classList: ['btn-container'] });
   const btnContainerTwo = btnContainerOne.cloneNode();
-  const editButton = createElement('button', { id: 'editEvent', html: '&plus;' });
-  const removeButton = createElement('button', { id: 'removeButton', html: '&times;' });
+  const editButton = createElement('button', { id: 'editEvent', html: '&plus;', listeners: [{ event: 'click', handler: () => editClickHandler.call(event, eventData._id) }] });
+  const removeButton = createElement('button', { id: 'removeButton', html: '&times;', listeners: [{ event: 'click', handler: () => deleteClickHandler.call(event, eventData._id) }] });
   btnContainerOne.appendChild(editButton);
   btnContainerTwo.appendChild(removeButton);
   [number, title, btnContainerOne, btnContainerTwo].forEach(child => event.appendChild(child));

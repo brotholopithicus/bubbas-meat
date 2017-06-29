@@ -9,7 +9,7 @@ block content
     #app
     .events
       h1 Event List
-      .event
+      .event(data-index="0")
         h4 Num.
         h4 Title
         h4 Edit
@@ -21,27 +21,27 @@ block content
           .form-control
             label.form-label(for='title')
               span Title
-            input#title.form-input(type='text', name='title', placeholder='Title', required)
+            input#title.form-input(type='text', name='title', placeholder='Title')
           .form-control
             label.form-label(for='description')
               span Description
-            input#description.form-input(type='text', name='description', placeholder='Description', required)
+            input#description.form-input(type='text', name='description', placeholder='Description')
           .form-control
             label.form-label(for='startDate')
               span Date
-            input#startDate.form-input.flatpickr(type='text', name='startDate', placeholder='Start Date', required)
+            input#startDate.form-input.flatpickr(type='text', name='startDate', placeholder='Start Date')
           .form-control
             label.form-label(for='endDate')  
               span End Date
-            input#endDate.form-input.flatpickr(type='text', name='endDate', placeholder='End Date', required)
+            input#endDate.form-input.flatpickr(type='text', name='endDate', placeholder='End Date')
           .form-control
             label.form-label(for='address')
               span Address
-            input#address.form-input(type='text', name='address', placeholder='Street Address', required)
+            input#address.form-input(type='text', name='address', placeholder='Street Address')
           .form-control
             label.form-label(for='city')
               span City
-            input#city.form-input(type='text', name='city', placeholder='City', required)
+            input#city.form-input(type='text', name='city', placeholder='City')
           .form-control
             label.form-label(for='state')
               span State
@@ -49,7 +49,7 @@ block content
           .form-control
             label.form-label(for='zip')
               span Zip
-            input#zip.form-input(type='text', name='zip', placeholder='Zip', required)
+            input#zip.form-input(type='text', name='zip', placeholder='Zip')
           .form-control
             label.form-label(for='link')
               span Link URL

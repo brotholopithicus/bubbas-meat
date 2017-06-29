@@ -17,7 +17,7 @@ router.post('/', auth.required, (req, res, next) => {
   const data = {
     title: req.body.title,
     description: req.body.description,
-    date:{
+    date: {
       start: req.body.startDate,
       end: req.body.endDate
     },
@@ -39,7 +39,7 @@ router.post('/', auth.required, (req, res, next) => {
     }
   }
 
-  if(req.body.repeat) {
+  if (req.body.repeat) {
     data.date.repeat = req.body.repeat;
   }
 
@@ -49,12 +49,19 @@ router.post('/', auth.required, (req, res, next) => {
   });
 });
 
+/* GET event. */
+router.get('/:id', auth.required, (req, res, next) => {
+  Event.findById(req.params.id, (err, event) => {
+    if (err) return next(err);
+    return res.json({ message: 'OK', event });
+  });
+});
+
 /* DELETE event. */
 router.delete('/:id', auth.required, (req, res, next) => {
-  Event.findByIdAndRemove(req.params.id, (err, doc) => {
+  Event.findByIdAndRemove(req.params.id, (err, event) => {
     if (err) return next(err);
-    console.log('successfully deleted: ', doc);
-    return res.json({ message: 'OK', doc });
+    return res.json({ message: 'OK', event });
   });
 });
 

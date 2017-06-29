@@ -10,8 +10,11 @@ const EventSchema = new Schema({
     address: { street: String, city: String, state: String, zip: String }
   },
   link: { url: String, text: String },
-  expireAt: Date
+  createdAt: { type: Date, default: Date.now },
+  expireAt: { type: Date, default: undefined }
 });
+
+EventSchema.index({ expireAt: 1 }, { expireAfterSeconds: 0 });
 
 const Event = mongoose.model('Event', EventSchema);
 
