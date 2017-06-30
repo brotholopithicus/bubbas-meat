@@ -6,14 +6,17 @@ block stylesheets
 block content
   include partials/header
   .admin-container.sub-container
-    #app
     .events
-      h1 Event List
-      .event(data-index="0")
-        h4 Num.
-        h4 Title
-        h4 Edit
-        h4 Delete
+      h1 Events List
+      table.table
+        thead
+          tr
+            th &#x23;
+            th Title
+            th Edit
+            th Delete
+        tbody.event-list
+            
     .new-event
       form.admin-form#admin
         fieldset
@@ -58,7 +61,7 @@ block content
             label.form-label(for='linktext')
               span Link Text
             input#text.form-input(type='text', name='linktext', placeholder='Link Text')
-        button.submit Submit
+          button.submit.button Submit
 
 block scripts
   script(src='/js/admin.bundle.js')

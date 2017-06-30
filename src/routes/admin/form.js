@@ -1,6 +1,8 @@
 import flatpickr from './flatpickr';
 import requestify from './requestify';
 
+import template from './templates/events.pug';
+
 function Form() {
   this.initialize = () => {
     this.submitButton = document.querySelector('button.submit');
@@ -40,23 +42,8 @@ function Form() {
       headers: [{ name: 'Content-Type', value: 'application/json' }],
       data: JSON.stringify(formData)
     }
-
-    requestify('/api/events', options).then(JSON.parse).then(res => {
-      const empty = document.querySelector('.empty');
-      if (empty) {
-        eventsContainer.removeChild(empty);
-      }
-      const oldElement = document.getElementById(res.event._id);
-      if (oldElement) {
-        const index = parseInt(oldElement.dataset.index);
-        const newElement = createEventElement(res.event, index);
-        eventsContainer.replaceChild(newElement, oldElement);
-      } else {
-        const index = parseInt(eventsContainer.lastChild.dataset.index) + 1;
-        const newElement = createEventElement(res.event, index);
-        renderElement(newElement, eventsContainer);
-      }
-      console.log(this);
+    requestify(`/api/events`, options).then(() => {
+      fetchEvents();
       this.formSubmitted = false;
     });
   }
@@ -65,11 +52,10 @@ function Form() {
 const form = new Form();
 form.initialize();
 
-function editClickHandler(id) {
-  requestify(`/api/events/${id}`, { method: 'GET' })
+function editClickHandler() {
+  requestify(`/api/events/${this.dataset.id}`, { method: 'GET' })
     .then(res => JSON.parse(res).event)
     .then(event => {
-      console.log(event);
       form.title.value = event.title;
       form.description.value = event.description;
       form.address.value = event.location.address.street;
@@ -89,71 +75,28 @@ function editClickHandler(id) {
     })
 }
 
-function deleteClickHandler(id) {
-  requestify(`/api/events/${id}`, { method: 'DELETE' }).then(JSON.parse).then(res => {
-    if (res.message === 'OK') {
-      window.location.reload();
-    } else {
-      alert('error deleting that thing you tried to delete.');
-    }
-  });
-}
-
-function createElement(tagName, options) {
-  const el = document.createElement(tagName);
-  if (typeof options.dataset !== 'undefined') {
-    for (let key in options.dataset) {
-      el.dataset[key] = options.dataset[key];
-    }
+function removeClickHandler() {
+  const confirmRemove = confirm(`Are you sure you want to remove ${this.dataset.id}?`);
+  if (confirmRemove) {
+    requestify(`/api/events/${this.dataset.id}`, { method: 'DELETE' }).then(() => {
+      fetchEvents();
+      form.formInputs.forEach(input => input.value = '');
+    });
   }
-  if (typeof options.classList !== 'undefined') el.classList.add(...options.classList);
-  if (typeof options.text !== 'undefined') el.textContent = options.text;
-  if (typeof options.html !== 'undefined') el.innerHTML = options.html;
-  if (typeof options.id !== 'undefined') el.id = options.id;
-  if (typeof options.listeners !== 'undefined') options.listeners.forEach(listener => el.addEventListener(listener.event, listener.handler));
-  return el;
 }
 
-const eventsContainer = document.querySelector('.events');
+const eventsContainer = document.querySelector('.event-list');
 
-function generateEventElements(events) {
-  let elements = [];
-  if (events.length) {
-    for (let i = 0; i < events.length; i++) {
-      const event = createEventElement(events[i], i + 1);
-      elements.push(event);
-    }
-  } else {
-    const emptyEvent = createElement('div', { classList: ['event', 'empty'] });
-    const title = createElement('h4', { text: `There's nothing here.` });
-    emptyEvent.appendChild(title);
-    elements.push(emptyEvent);
-  }
-  return elements;
-}
-
-function createEventElement(eventData, index) {
-  const event = createElement('div', { id: eventData._id, classList: ['event'], dataset: { index } });
-  const number = createElement('h4', { text: index + '.' });
-  const title = createElement('h4', { text: eventData.title });
-  const btnContainerOne = createElement('div', { classList: ['btn-container'] });
-  const btnContainerTwo = btnContainerOne.cloneNode();
-  const editButton = createElement('button', { id: 'editEvent', html: '&plus;', listeners: [{ event: 'click', handler: () => editClickHandler.call(event, eventData._id) }] });
-  const removeButton = createElement('button', { id: 'removeButton', html: '&times;', listeners: [{ event: 'click', handler: () => deleteClickHandler.call(event, eventData._id) }] });
-  btnContainerOne.appendChild(editButton);
-  btnContainerTwo.appendChild(removeButton);
-  [number, title, btnContainerOne, btnContainerTwo].forEach(child => event.appendChild(child));
-  return event;
-}
-
-function renderElement(element, parent) {
-  parent.appendChild(element);
+function bindEventListeners(selector, listener, handler) {
+  document.querySelectorAll(selector).forEach(el => el.addEventListener(listener, () => handler.call(el.parentNode.parentNode)));
 }
 
 async function fetchEvents() {
-  const events = await requestify('/api/events', { method: 'GET' });
-  const elements = generateEventElements(JSON.parse(events));
-  elements.forEach(element => renderElement(element, eventsContainer));
+  const events = await requestify('/api/events', { method: 'GET' }).then(JSON.parse);
+  const eventListHtml = template({ events });
+  eventsContainer.innerHTML = eventListHtml;
+  bindEventListeners('#editEvent', 'click', editClickHandler);
+  bindEventListeners('#removeEvent', 'click', removeClickHandler);
 }
 
 window.onload = () => fetchEvents();
