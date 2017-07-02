@@ -7,8 +7,8 @@ function Form() {
   this.initialize = () => {
     this.submitButton = document.querySelector('button.submit');
     this.date = {
-      startDate: flatpickr('#startDate', { enableTime: true }),
-      endDate: flatpickr('#endDate', { enableTime: true })
+      startDate: flatpickr('#startDate', { enableTime: true, minDate: 'today' }),
+      endDate: flatpickr('#endDate', { enableTime: true, minDate: 'today' })
     }
     this.form = document.querySelector('form');
     this.title = document.querySelector('input#title');
@@ -24,8 +24,6 @@ function Form() {
     this.submitButton.addEventListener('click', this.submitForm);
     this.formSubmitted = false;
     this.formInputs = document.querySelectorAll('.form-input');
-
-    this.startDate.addEventListener('change', () => this.date.endDate.setDate(this.startDate.value));
   }
   this.submitForm = (e) => {
     e.preventDefault();

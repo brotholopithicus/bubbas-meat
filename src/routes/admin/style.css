@@ -96,6 +96,7 @@ legend, .form-control.form-textarea .form-label {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  font-size: 0.75em;
 }
 
 .form-control.form-textarea {
@@ -182,6 +183,30 @@ form input, form textarea, form [required], form select {
     color: rgba(43, 62, 82, 0.5);
     font-size: 75%;
   }
+}
+
+.form-input-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex: 1;
+}
+
+.input-group-addon {
+  vertical-align: baseline;
+  padding: 3px 8px;
+  font-size: 0.6em;
+  background-color: #e9ecef;
+  border: 1px solid rgba(43, 62, 82, 0.5);
+  border-right: none;
+  border-top-left-radius: 0.15em;
+  border-bottom-left-radius: 0.15em;
+  color: rgba(43, 62, 82, 0.9);
+}
+
+.form-control .form-input-group input {
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
 }
 
 select {

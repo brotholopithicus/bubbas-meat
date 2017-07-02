@@ -56,7 +56,9 @@ block content
           .form-control
             label.form-label(for='link')
               span Link URL
-            input#url.form-input(type='text', name='link', placeholder='Link URL')
+            .form-input-group
+              .input-group-addon https://
+              input#url.form-input(type='text', name='link', placeholder='Link URL')
           .form-control
             label.form-label(for='linktext')
               span Link Text
