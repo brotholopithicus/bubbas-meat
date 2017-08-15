@@ -1,7 +1,8 @@
 import flatpickr from './flatpickr';
 import requestify from './requestify';
 
-import template from './templates/events.pug';
+import eventTemplate from './templates/events.pug';
+import reviewTemplate from './templates/reviews.pug';
 
 function Form() {
   this.initialize = () => {
@@ -91,10 +92,31 @@ function bindEventListeners(selector, listener, handler) {
 
 async function fetchEvents() {
   const events = await requestify('/api/events', { method: 'GET' }).then(JSON.parse);
-  const eventListHtml = template({ events });
+  const eventListHtml = eventTemplate({ events });
   eventsContainer.innerHTML = eventListHtml;
   bindEventListeners('#editEvent', 'click', editClickHandler);
   bindEventListeners('#removeEvent', 'click', removeClickHandler);
 }
 
-window.onload = () => fetchEvents();
+const reviewsContainer = document.querySelector('.review-list');
+
+function toggleReviewShow() {
+  console.log(this.dataset.id);
+  requestify(`/api/reviews/${this.dataset.id}`, { method: 'PUT' });
+}
+
+async function fetchReviews() {
+  const reviews = await requestify('/api/reviews', { method: 'GET' }).then(JSON.parse);
+  const reviewListHtml = reviewTemplate({ reviews: reviews.reviews });
+  reviewsContainer.innerHTML = reviewListHtml;
+  bindEventListeners('.review-toggle', 'click', toggleReviewShow);
+  bindEventListeners('#removeReview', 'click', removeReviewClickHandler);
+}
+
+function removeReviewClickHandler() {
+  requestify(`/api/reviews/${this.dataset.id}`, { method: 'DELETE' }).then(() => fetchReviews());
+}
+window.onload = () => {
+  fetchEvents();
+  fetchReviews();
+}

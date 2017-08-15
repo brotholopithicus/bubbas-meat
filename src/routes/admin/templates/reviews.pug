@@ -1,0 +1,11 @@
+each review, index in reviews
+  tr.review(data-id=review._id)
+    td= (index + 1) + '.'
+    td= review.quote
+    td= review.name
+    td.slider-wrapper
+      - var id = 'showReview-' + index 
+        input.review-toggle(id=id, type='checkbox', checked=review.show, name='show', value='show')
+      label.slider(for=id)
+    td.btn-container
+      button#removeReview.button &times;

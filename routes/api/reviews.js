@@ -18,6 +18,12 @@ router.get('/', (req, res, next) => {
   }).catch(next);
 });
 
+router.get('/approved', (req, res, next) => {
+  Review.find({ show: true }).then((reviews) => {
+    return res.json({ message: 'SUCCESS', reviews });
+  }).catch(next);
+});
+
 /* POST new review */
 router.post('/', auth.required, (req, res, next) => {
   let review = new Review();
@@ -26,6 +32,17 @@ router.post('/', auth.required, (req, res, next) => {
   review.save().then((doc) => {
     return res.json({ message: 'SUCCESS', doc });
   }).catch(next);
+});
+
+/* PUT update review */
+router.put('/:id', auth.required, (req, res, next) => {
+  Review.findById(req.params.id, (err, review) => {
+    if (err) return next(err);
+    review.show = !review.show;
+    review.save().then((review) => {
+      return res.json({ message: 'SUCCESS', review })
+    }).catch(next);
+  });
 });
 
 /* DELETE review. */

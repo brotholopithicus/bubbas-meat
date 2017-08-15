@@ -46,15 +46,15 @@ router.get('/events', (req, res, next) => {
 });
 
 /* GET reviews page. */
-// router.get('/reviews', (req, res, next) => {
-//   Review.find({}).then((reviews) => {
-//     res.render('reviews', { title: `Reviews - Gordo Gustavo's`, reviews });
-//   }).catch(next);
-// });
-
 router.get('/reviews', (req, res, next) => {
-  res.render('reviews', { title: `Reviews - Gordo Gustavo's`, reviews });
+  Review.find({ show: true }).then((reviews) => {
+    res.render('reviews', { title: `Reviews - Gordo Gustavo's`, reviews });
+  }).catch(next);
 });
+
+// router.get('/reviews', (req, res, next) => {
+//   res.render('reviews', { title: `Reviews - Gordo Gustavo's`, reviews });
+// });
 
 /* GET admin page. */
 router.get('/admin', auth.required, (req, res, next) => {
@@ -62,7 +62,10 @@ router.get('/admin', auth.required, (req, res, next) => {
     if (!user) return res.redirect('/login');
     Event.find({}, (err, events) => {
       if (err) return next(err);
-      res.render('admin', { title: `Admin - Gordo Gustavo's`, events });
+      Review.find({}, (err, review) => {
+        if (err) return next(err);
+        res.render('admin', { title: `Admin - Gordo Gustavo's`, events, review });
+      });
     });
   }).catch(next);
 });

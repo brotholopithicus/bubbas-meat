@@ -5,6 +5,7 @@ import swansonQuote from './swansonquote';
 const reviews = document.querySelectorAll('.review');
 const API_KEY = 'MTk4NjIw';
 const url = `https://thecatapi.com/api/images/get?api_key=${API_KEY}&format=src&size=small&type=jpg`;
+
 reviews.forEach(review => {
   fetch(url).then(res => res.blob()).then(data => {
     const imgContainer = review.querySelector('.image');
