@@ -179,7 +179,7 @@ function renderNewReviewTemplate() {
   const submitReviewButton = document.querySelector('#submitReview');
   submitReviewButton.addEventListener('click', submitNewReviewForm);
   const clearNewReviewButton = document.querySelector('#clearReview');
-  clearNewReviewButton.addEventListener('click', clearNewReviewForm);
+  clearNewReviewButton.addEventListener('click', clearNewReviewClickHandler);
 }
 
 let newReviewSubmitted = false;
@@ -212,8 +212,12 @@ function submitNewReviewForm(e) {
     }).catch(err => console.error(`Error: ${err.message}`));
 }
 
-function clearNewReviewForm(e) {
+function clearNewReviewClickHandler(e) {
   e.preventDefault();
+  clearNewReviewForm();
+}
+
+function clearNewReviewForm() {
   const newReviewForm = document.querySelector('.new-review');
   newReviewForm.querySelectorAll('.form-input').forEach(input => input.value = '');
 }
