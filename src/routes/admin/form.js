@@ -22,31 +22,58 @@ function Form() {
     this.zip = document.querySelector('input#zip');
     this.link = document.querySelector('input#url');
     this.linkText = document.querySelector('input#text');
+
     this.submitButton.addEventListener('click', this.submitForm);
     this.formSubmitted = false;
     this.formInputs = document.querySelectorAll('.form-input');
+
+    this.status = {
+      isNew: true,
+      id: null
+    }
   }
   this.submitForm = (e) => {
     e.preventDefault();
     if (this.formSubmitted) return;
     this.formSubmitted = true;
-    let formData = {};
+
+    const formData = {};
+
     this.formInputs.forEach(input => {
       formData[input.id] = input.value
       input.value = '';
     });
+    formData.repeat = [...document.querySelectorAll(`input[type='radio']`)].find(input => input.checked).value;
 
-    const options = {
-      method: 'POST',
-      headers: [{ name: 'Content-Type', value: 'application/json' }],
-      data: JSON.stringify(formData)
+    const request = {
+      options: {
+        headers: [{ name: 'Content-Type', value: 'application/json' }],
+        data: JSON.stringify(formData)
+      }
     }
-    requestify(`/api/events`, options).then(() => {
+
+    if (this.status.isNew) {
+      request.url = '/api/events';
+      request.options.method = 'POST';
+    } else {
+      request.url = `/api/events/${this.status.id}`
+      request.options.method = 'PUT'
+    }
+
+    requestify(request.url, request.options).then((res) => {
+      console.log(res);
+      this.resetForm();
       fetchEvents();
-      this.formSubmitted = false;
     });
+
+  }
+  this.resetForm = () => {
+    this.formSubmitted = false;
+    this.status.isNew = true;
+    this.status.id = null;
   }
 }
+
 
 const form = new Form();
 form.initialize();
@@ -66,10 +93,15 @@ function editClickHandler() {
         form.link.value = event.link.url;
         form.linkText.value = event.link.text;
       }
-      const stateSelect = form.state.querySelector(`[selected='true']`);
-      if (stateSelect) {
-        stateSelect.selected = false;
-      }
+
+      const repeatRadio = [...document.querySelectorAll(`input[type='radio']`)].find(radio => radio.value === event.date.repeat);
+      repeatRadio.checked = true;
+
+      form.status.isNew = false;
+      form.status.id = event._id;
+
+      if (form.state.querySelector(`[selected='true']`)) stateSelect.selected = false;
+
       form.state.querySelector(`[value='${event.location.address.state}']`).selected = true;
     })
 }
@@ -116,6 +148,16 @@ async function fetchReviews() {
 function removeReviewClickHandler() {
   requestify(`/api/reviews/${this.dataset.id}`, { method: 'DELETE' }).then(() => fetchReviews());
 }
+
+function clearForm(e) {
+  e.preventDefault();
+  form.formInputs.forEach(input => input.value = '');
+  form.status.isNew = true;
+  form.status.id = null;
+}
+
+const clearButton = document.querySelector('button#clear');
+clearButton.addEventListener('click', clearForm);
 window.onload = () => {
   fetchEvents();
   fetchReviews();

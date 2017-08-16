@@ -41,7 +41,7 @@ Admin Page
   margin: 0 1rem;
   & h1, & legend {
     font-family: 'IndustryInc-Base';
-    font-size: 1.5rem;
+    font-size: 1rem;
     text-align: center;
     color: #2b3e51;
   }
@@ -78,29 +78,27 @@ form {
 
 fieldset {
   border: none;
-  margin: 1rem 0;
-  padding: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 0;
 }
 
 legend, .form-control.form-textarea .form-label {
-  margin-bottom: 20px;
-  font-size: 1.25rem;
+  font-size: 1em;
   width: 100%;
   border-bottom: 1px solid #d4d4d4;
   text-align: left;
 }
 
 .form-control {
-  margin: 0.5rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   font-size: 0.75em;
+  margin: 0.45em;
 }
 
 .form-control.form-textarea {
@@ -465,4 +463,38 @@ input:checked+.slider::before {
 
 .admin-container .sub-container:not(.active) {
   display: none;
+}
+
+button#clear {
+  background-color: rgb(254, 84, 90);
+  color: white;
+  font-weight: 300;
+  margin: 0 auto;
+  color: #fff;
+  font-size: 0.75rem;
+  height: 1.45rem;
+  padding: 0.3rem 0.5rem;
+}
+
+.repeat {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.repeat label {
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.form-control:first-child {
+  margin-top: 0;
+}
+
+button#removeReview {
+  border: none;
+  background-color: rgba(254, 84, 90);
+  color: #fff;
 }

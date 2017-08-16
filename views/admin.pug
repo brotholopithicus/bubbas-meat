@@ -12,7 +12,6 @@ block content
   .admin-container
     #reviews.sub-container
       .reviews
-        h1 Reviews List
         table.table
           thead
             tr
@@ -24,7 +23,6 @@ block content
           tbody.review-list
     #events.sub-container.active      
       .events
-        h1 Events List
         table.table
           thead
             tr
@@ -37,7 +35,6 @@ block content
       .new-event
         form.admin-form#admin
           fieldset
-            legend New Event
             .form-control
               label.form-label(for='title')
                 span Title
@@ -54,6 +51,18 @@ block content
               label.form-label(for='endDate')  
                 span End Date
               input#endDate.form-input.flatpickr(type='text', name='endDate', placeholder='End Date')
+            .form-control
+              label.form-label
+                span Repeat
+              .repeat
+                input#norepeat(type='radio', checked=true, name='repeat', value='NR')
+                label(for='norepeat') No Repeat
+                input#daily(type='radio', name='repeat', value='D')
+                label(for='daily') Daily
+                input#weekly(type='radio', name='repeat', value='W')
+                label(for='weekly') Weekly
+                input#monthly(type='radio', name='repeat', value='M')
+                label(for='monthly') Monthly
             .form-control
               label.form-label(for='address')
                 span Address
@@ -80,7 +89,10 @@ block content
               label.form-label(for='linktext')
                 span Link Text
               input#text.form-input(type='text', name='linktext', placeholder='Link Text')
-            button.submit.button Submit
-
+            .form-control
+              button.submit.button Submit
+            hr
+            .form-control
+              button#clear.button Clear Form
 block scripts
   script(src='/js/admin.bundle.js')

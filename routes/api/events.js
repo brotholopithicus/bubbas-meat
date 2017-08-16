@@ -14,38 +14,17 @@ router.get('/', (req, res, next) => {
 /* POST create / update event. */
 router.post('/', auth.required, (req, res, next) => {
   if (!req.body) return res.sendStatus(404);
-  const data = {
-    title: req.body.title,
-    description: req.body.description,
-    date: {
-      start: req.body.startDate,
-      end: req.body.endDate
-    },
-    location: {
-      address: {
-        street: req.body.address,
-        city: req.body.city,
-        state: req.body.state,
-        zip: req.body.zip
-      }
-    },
-    expireAt: req.body.endDate
-  }
+  const data = formatRequestBody(req);
+  const event = new Event(data);
+  event.save().then((event) => {
+    return res.json({ message: 'SUCCESS', event });
+  }).catch(next);
+});
 
-  if (req.body.url && req.body.text) {
-    data.link = {
-      url: req.body.url,
-      text: req.body.text
-    }
-  }
-
-  if (req.body.repeat) {
-    data.date.repeat = req.body.repeat;
-  }
-
-  Event.findOneAndUpdate({ title: data.title }, data, { upsert: true, new: true }, (err, event) => {
+router.put('/:id', auth.required, (req, res, next) => {
+  Event.findByIdAndUpdate(req.params.id, formatRequestBody(req), { new: true }, (err, event) => {
     if (err) return next(err);
-    return res.json({ message: 'OK', event });
+    return res.json({ message: 'SUCCESS', event });
   });
 });
 
@@ -65,5 +44,33 @@ router.delete('/:id', auth.required, (req, res, next) => {
   });
 });
 
+function formatRequestBody(req) {
+  const data = {
+    title: req.body.title,
+    description: req.body.description,
+    date: {
+      start: req.body.startDate,
+      end: req.body.endDate
+    },
+    location: {
+      address: {
+        street: req.body.address,
+        city: req.body.city,
+        state: req.body.state,
+        zip: req.body.zip
+      }
+    }
+  }
+  if (req.body.url && req.body.text) {
+    data.link = {
+      url: req.body.url,
+      text: req.body.text
+    }
+  }
+  if (req.body.repeat) {
+    data.date.repeat = req.body.repeat;
+  }
+  return data;
+}
 
 module.exports = router;

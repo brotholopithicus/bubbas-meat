@@ -8,12 +8,16 @@ const api = require('./api');
 
 const auth = require('./auth');
 
+const updateEvents = require('./update');
+
 router.use((req, res, next) => {
   if (req.cookies.jwt) {
     req.headers.authorization = req.cookies.jwt;
   }
   next();
 });
+
+const interval = setInterval(() => updateEvents(), 10000);
 
 router.use('/api', api);
 
