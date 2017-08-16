@@ -353,6 +353,7 @@ Loader
 
 .slider {
   margin: 0 auto;
+  transform: scale(0.75, 0.75);
 }
 
 .slider {
@@ -547,4 +548,19 @@ button#submit:focus, button#submitReview:focus {
 
 button#clear:focus, button#clearReview:focus {
   box-shadow: 0 0 0 3px rgba(200, 35, 51, 0.5);
+}
+
+tr.review td {
+  padding: 0;
+  vertical-align: middle;
+  font-size: 0.55rem;
+}
+
+@media(max-width: 900px) {
+  .slider {
+    transform: scale(0.5, 0.5);
+  }
+  tr.review td {
+    font-size: 0.75rem;
+  }
 }
