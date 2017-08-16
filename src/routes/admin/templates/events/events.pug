@@ -1,7 +1,7 @@
 each event, index in events
   tr.event(data-id=event._id)
-    td= (index + 1) + '.'
-    td= event.title
+    td.event-number= (index + 1) + '.'
+    td.event-title= event.title
     td.btn-container
       button#editEvent.button &plus;
     td.btn-container

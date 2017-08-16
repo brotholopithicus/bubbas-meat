@@ -1,12 +1,19 @@
 import flatpickr from './flatpickr';
 import requestify from './requestify';
 
-import eventTemplate from './templates/events.pug';
-import reviewTemplate from './templates/reviews.pug';
+import eventTemplate from './templates/events/events.pug';
+import reviewTemplate from './templates/reviews/reviews.pug';
 
 function Form() {
   this.initialize = () => {
-    this.submitButton = document.querySelector('button.submit');
+    // prevent form submission on enter key down
+    window.addEventListener('keydown', (e) => {
+      if (e.keyCode === 13) {
+        e.preventDefault();
+      }
+    });
+
+    this.submitButton = document.querySelector('button#submit');
     this.date = {
       startDate: flatpickr('#startDate', { enableTime: true, minDate: 'today' }),
       endDate: flatpickr('#endDate', { enableTime: true, minDate: 'today' })
@@ -107,7 +114,8 @@ function editClickHandler() {
 }
 
 function removeClickHandler() {
-  const confirmRemove = confirm(`Are you sure you want to remove ${this.dataset.id}?`);
+  const title = this.querySelector('.event-title').textContent;
+  const confirmRemove = confirm(`Are you sure you want to remove "${title}"?`);
   if (confirmRemove) {
     requestify(`/api/events/${this.dataset.id}`, { method: 'DELETE' }).then(() => {
       fetchEvents();
@@ -151,6 +159,8 @@ function removeReviewClickHandler() {
 
 function clearForm(e) {
   e.preventDefault();
+  const clearForm = confirm('Do you really want to clear all inputs and reset form?');
+  if (!clearForm) return;
   form.formInputs.forEach(input => input.value = '');
   form.status.isNew = true;
   form.status.id = null;
@@ -158,7 +168,58 @@ function clearForm(e) {
 
 const clearButton = document.querySelector('button#clear');
 clearButton.addEventListener('click', clearForm);
+
+import newReviewTemplate from './templates/reviews/new_review.pug';
+
+const newReviewContainer = document.querySelector('.new-review');
+
+function renderNewReviewTemplate() {
+  const newReviewHtml = newReviewTemplate();
+  newReviewContainer.innerHTML = newReviewHtml;
+  const submitReviewButton = document.querySelector('#submitReview');
+  submitReviewButton.addEventListener('click', submitNewReviewForm);
+  const clearNewReviewButton = document.querySelector('#clearReview');
+  clearNewReviewButton.addEventListener('click', clearNewReviewForm);
+}
+
+let newReviewSubmitted = false;
+
+function submitNewReviewForm(e) {
+  e.preventDefault();
+  if (newReviewSubmitted) return;
+
+  newReviewSubmitted = true;
+  const review = {};
+  review.quote = document.querySelector('#quote').value;
+  review.name = document.querySelector('#name').value;
+  if (!review.quote.length || !review.name.length) return;
+
+  const options = {
+    method: 'POST',
+    headers: [{
+      name: 'Content-Type',
+      value: 'application/json'
+    }],
+    data: JSON.stringify(review)
+  }
+  requestify(`/api/reviews`, options)
+    .then(res => JSON.parse(res))
+    .then(res => {
+      if (res.message === 'SUCCESS') {
+        clearNewReviewForm();
+        fetchReviews();
+      }
+    }).catch(err => console.error(`Error: ${err.message}`));
+}
+
+function clearNewReviewForm(e) {
+  e.preventDefault();
+  const newReviewForm = document.querySelector('.new-review');
+  newReviewForm.querySelectorAll('.form-input').forEach(input => input.value = '');
+}
+
 window.onload = () => {
+  renderNewReviewTemplate();
   fetchEvents();
   fetchReviews();
 }

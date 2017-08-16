@@ -29,8 +29,8 @@ router.post('/', auth.required, (req, res, next) => {
   let review = new Review();
   review.quote = req.body.quote;
   review.name = req.body.name;
-  review.save().then((doc) => {
-    return res.json({ message: 'SUCCESS', doc });
+  review.save().then((review) => {
+    return res.json({ message: 'SUCCESS', review });
   }).catch(next);
 });
 

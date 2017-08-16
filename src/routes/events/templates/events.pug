@@ -1,8 +1,9 @@
 each event in events
   .event(data-event=event)
-    .event-text
-      h3= event.title
-      h6= event.description
+    .event-header
+      span= event.title
+    .event-body
+      h4.event-description= event.description
       -
         function checkSameDay(date1, date2) {
           date1 = Date.parse(date1);
@@ -47,21 +48,26 @@ each event in events
         function formatMinutes(minutes) {
           return ('0' + minutes).slice(-2);
         }
-      .date= generateHumanDate(event.date.start, event.date.end)
-      address.address
-        span= event.location.address.street
-        br
-        span= event.location.address.city + ', '
-        span= event.location.address.state + ' '
-        span= event.location.address.zip
-    .event-links
-      - var link = 'https://www.google.com/maps/dir//';
-      each value, key in event.location.address
-        - link += event.location.address[key] + ','
-      a(href=link, target='_blank', rel='noopener noreferrer') Directions
-      if event.link
-        a(href='https://' + event.link.url, target='_blank', rel='noopener noreferrer')= event.link.text.charAt(0) + event.link.text.toLowerCase().slice(1)
+      .event-text
+        .date= generateHumanDate(event.date.start, event.date.end)
+        address.address
+          span= event.location.address.street
+          br
+          span= event.location.address.city + ', '
+          span= event.location.address.state + ' '
+          span= event.location.address.zip
+    .event-footer
+      .event-links
+        - var link = 'https://www.google.com/maps/dir//';
+        each value, key in event.location.address
+          - link += event.location.address[key] + ','
+        a.event-link(href=link, target='_blank', rel='noopener noreferrer') Directions
+        if event.link
+          a.event-link(href='https://' + event.link.url, target='_blank', rel='noopener noreferrer')= event.link.text.charAt(0) + event.link.text.toLowerCase().slice(1)
 else
   .event
-    h3 NOTHING HERE. 
-    p Check back later for upcoming events.
+    .event-header
+      span Nothing Here
+    .event-body
+      .event-description Check back later for upcoming events.
+    .event-footer

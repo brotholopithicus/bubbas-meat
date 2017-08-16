@@ -21,6 +21,8 @@ block content
               th Show/Hide
               th Delete
           tbody.review-list
+      .new-review
+
     #events.sub-container.active      
       .events
         table.table
@@ -89,10 +91,8 @@ block content
               label.form-label(for='linktext')
                 span Link Text
               input#text.form-input(type='text', name='linktext', placeholder='Link Text')
-            .form-control
-              button.submit.button Submit
-            hr
-            .form-control
-              button#clear.button Clear Form
+            .form-control.form-buttons
+              button#submit.button Submit
+              button#clear.button Clear
 block scripts
   script(src='/js/admin.bundle.js')

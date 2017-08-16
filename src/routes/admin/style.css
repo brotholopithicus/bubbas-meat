@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
+
+/*******************************
+            Button
+*******************************/
+
 .button {
-  -webkit-appearance: none;
   align-items: center;
   border: 1px solid transparent;
   border-radius: 3px;
@@ -63,9 +67,10 @@ Admin Page
   }
 }
 
-#reviews {
+
+/*#reviews {
   grid-template-columns: 1fr;
-}
+}*/
 
 
 /* FORM */
@@ -147,25 +152,20 @@ form input:focus, form textarea:focus, form select:focus {
   overflow: auto;
 }
 
-form button.submit {
+form .button {
   margin: 0 auto;
-  background: #2b3e51;
-  color: #fff;
-  font-size: 0.75rem;
   height: 1.45rem;
   padding: 0.3rem 0.5rem;
+  font-size: 0.6rem;
 }
 
-form button.submit:hover {
-  background: #3a4e62;
-}
+form .button:hover {}
 
-form button.submit:focus {
+form .button:focus {
   outline: none;
-  background: #2b3e51;
 }
 
-form button.submit:active {
+form .button:active {
   transform: scale(0.9);
 }
 
@@ -183,7 +183,7 @@ form input, form textarea, form [required], form select {
   font-size: 75%;
   &::-webkit-input-placeholder {
     color: rgba(43, 62, 82, 0.5);
-    font-size: 75%;
+    font-size: 95%;
   }
 }
 
@@ -446,8 +446,9 @@ input:checked+.slider::before {
 }
 
 .tabs li.is-active a {
-  border-bottom-color: #00d1b2;
-  color: #00d1b2;
+  border-bottom-color: #ff8200;
+  color: #ff8200;
+  background-color: rgba(0, 0, 0, 0.04);
 }
 
 .tabs ul {
@@ -463,17 +464,6 @@ input:checked+.slider::before {
 
 .admin-container .sub-container:not(.active) {
   display: none;
-}
-
-button#clear {
-  background-color: rgb(254, 84, 90);
-  color: white;
-  font-weight: 300;
-  margin: 0 auto;
-  color: #fff;
-  font-size: 0.75rem;
-  height: 1.45rem;
-  padding: 0.3rem 0.5rem;
 }
 
 .repeat {
@@ -497,4 +487,64 @@ button#removeReview {
   border: none;
   background-color: rgba(254, 84, 90);
   color: #fff;
+}
+
+.form-control:last-child .form-label span::after {
+  content: '';
+}
+
+.form-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-buttons .button {
+  margin: 0 0.25rem;
+  display: inline-block;
+  font-weight: normal;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: 0.3rem 0.5rem;
+  font-size: 0.5rem;
+  line-height: 1.25;
+  border-radius: 0.15rem;
+  color: #fff;
+  width: 80px;
+  height: 32px;
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+button#clear, button#clearReview {
+  color: #fff;
+  background-color: #e32235;
+  border-color: #e32235;
+}
+
+button#clear:hover, button#clearReview:hover {
+  background-color: #c82333;
+  border-color: #bd2130;
+}
+
+button#submit, button#submitReview {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+button#submit:hover, button#submitReview:hover {
+  background-color: #0069d9;
+  border-color: #0062cc;
+}
+
+button#submit:focus, button#submitReview:focus {
+  box-shadow: 0 0 0 3px rgba(0, 105, 217, 0.5);
+}
+
+button#clear:focus, button#clearReview:focus {
+  box-shadow: 0 0 0 3px rgba(200, 35, 51, 0.5);
 }

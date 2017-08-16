@@ -1,0 +1,14 @@
+.new-review
+  form.admin-form#admin
+    fieldset
+      .form-control
+        label.form-label(for='quote')
+          span Quote
+        textarea#quote.form-input(name='quote', rows='10', placeholder='Review Quote Here...')
+      .form-control
+        label.form-label(for='name')
+          span Name
+        input#name.form-input(name='name', placeholder='Author')
+      .form-control.form-buttons
+        button#submitReview.button Submit
+        button#clearReview.button Clear
