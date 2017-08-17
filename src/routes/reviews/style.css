@@ -69,6 +69,7 @@ Reviews Page
     width: 150px;
   }
 }
+
 @media(min-width: 1400px) {
   .reviews-container {
     padding: 0 5rem;
@@ -77,4 +78,16 @@ Reviews Page
     width: 200px;
     height: 200px;
   }
+}
+
+.footer-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: dimgrey;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
