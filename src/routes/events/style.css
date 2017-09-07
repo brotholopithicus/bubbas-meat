@@ -17,7 +17,7 @@ Events Page
   --distanceBottom: (var(--descender));
   --distanceTop: (var(--ascender) - var(--capitalHeight));
   --valign: ((var(--distanceBottom) - var(--distanceTop)) * var(--computedFontSize));
-  --line-height: 3;
+  --line-height: 2;
 }
 
 .events-container {
@@ -96,7 +96,7 @@ Events Page
 
 .event-header span {
   vertical-align: calc(var(--valign) * -1px);
-  letter-spacing: 2px;
+  letter-spacing: normal;
 }
 
 .event-links {
@@ -176,4 +176,11 @@ Events Page
 
 .event-link+.event-link {
   margin-left: 1.25rem;
+}
+
+@media(max-width: 769px) {
+  .event-header {
+    font-size: 5vw;
+    line-height: 1;
+  }
 }
