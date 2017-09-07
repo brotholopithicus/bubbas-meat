@@ -518,18 +518,21 @@ export default class Slideify {
     this.nextButton = document.createElement('span');
     this.prevButton.innerHTML = `<img class="arrow" src="${arrowLeft}" />`;
     this.nextButton.innerHTML = `<img class="arrow" src="${arrowRight}" />`;
-    this.selector.parentNode.appendChild(this.prevButton);
+    this.selector.parentNode.prepend(this.prevButton);
     this.selector.parentNode.appendChild(this.nextButton);
 
     const buttonStyles = {
-      'position': 'absolute',
-      'top': this.selector.offsetTop,
-      'width': '2rem',
-      'height': '2rem',
+      // 'position': 'absolute',
+      // 'top': this.selector.offsetTop,
+      // 'width': '2rem',
+      // 'height': '2rem',
       'border-radius': '50%',
       'background-color': bgColor,
-      'padding': '0.2rem',
-      'cursor': 'pointer'
+      'cursor': 'pointer',
+      'display': 'flex',
+      'flex-direction': 'column',
+      'justify-content': 'center',
+      'align-items': 'center'
     }
 
     for (let style in buttonStyles) {
@@ -537,7 +540,7 @@ export default class Slideify {
       this.nextButton.style[style] = buttonStyles[style];
     }
 
-    this.setButtonPositions();
+    // this.setButtonPositions();
 
     this.prevButton.addEventListener('click', () => {
       clearInterval(this.interval);

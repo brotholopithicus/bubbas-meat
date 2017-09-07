@@ -107,7 +107,7 @@ Main Components
   text-align: center;
   font-size: 0.75rem;
   display: grid;
-  grid-template-columns: repeat(5, max-content);
+  grid-template-columns: repeat(5, 1fr);
 }
 
 .links-container a {
@@ -146,6 +146,7 @@ Main Components
 
 .main-header .logo {
   padding-left: 1rem;
+  height: 100%;
 }
 
 .container {
@@ -153,7 +154,7 @@ Main Components
 }
 
 img {
-  height: 100%;
+  max-height: 100%;
 }
 
 
@@ -223,9 +224,11 @@ Modal
   color: #f1f1f1;
 }
 
+.nav-toggle.open {}
+
 span.nav-toggle {
   cursor: pointer;
-  position: absolute;
+  position: relative;
   height: 2rem;
   width: 2rem;
   z-index: 50;

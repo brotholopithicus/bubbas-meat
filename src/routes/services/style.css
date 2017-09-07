@@ -35,33 +35,47 @@ Services Page
 
 .carousel {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
+  align-items: center;
   width: 100%;
-  max-width: 20rem;
-  margin: 1rem auto;
+  max-width: 85vw;
+  margin: 1rem;
 }
 
 .slider {
-  margin: 0;
-  position: relative;
+  flex: 0 0 500px;
 }
 
 .slider img {
-  width: 100%;
+  width: 500px;
   height: auto;
 }
 
 .carousel span {
   transition: 0.2s;
+  padding: 1rem;
+}
+
+.carousel span:first-child {
+  margin-right: 2rem;
+}
+
+.carousel span:last-child {
+  margin-left: 2rem;
 }
 
 .carousel span:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
-@media(min-width: 800px) {
-  .carousel {
-    width: 40%;
+.carousel span img {
+  max-height: 100%;
+  width: 2rem;
+}
+
+@media(max-width: 800px) {
+  .carousel span img {
+    display: none;
   }
 }
