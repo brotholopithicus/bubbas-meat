@@ -63,7 +63,7 @@ each event in events
           - link += event.location.address[key] + ','
         a.event-link(href=link, target='_blank', rel='noopener noreferrer') Directions
         if event.link
-          a.event-link(href='https://' + event.link.url, target='_blank', rel='noopener noreferrer')= event.link.text.charAt(0) + event.link.text.toLowerCase().slice(1)
+          a.event-link(href=event.link.url, target='_blank', rel='noopener noreferrer')= event.link.text.charAt(0) + event.link.text.toLowerCase().slice(1)
 else
   .event
     .event-header
