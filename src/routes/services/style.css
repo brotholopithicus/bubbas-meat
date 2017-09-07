@@ -8,6 +8,7 @@ Services Page
   flex-direction: column;
   align-items: center;
   color: #1f1f1f;
+  overflow-x: hidden;
 }
 
 .text-container {
